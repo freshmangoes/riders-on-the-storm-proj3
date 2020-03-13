@@ -15,12 +15,29 @@ module.exports = {
   //     .then(dbModel => res.json(dbModel))
   //     .catch(err => res.status(422).json(err));
   // },
-  create: (req, res) => {
-    // console.log(req.body);
-    db.User
-      .create(req.body)
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
+  // create: (req, res) => {
+  //   // console.log(req.body);
+  //   db.User
+  //     .create(req.body)
+  //     .then(dbModel => res.json(dbModel))
+  //     .catch(err => res.status(00).json(err));
+  // },
+  create2: async (req, res) => {
+    try {
+      // console.log(req.body.username, req.body.password)
+
+      const user = await db.User.findOne({ username: req.body.username })
+      if (!user) {
+        db.User.create(req.body)
+          .then(dbModel => res.json({ message: 'New user has been registered!' }))
+          .catch(error => res.status(200).json({ message: error }));
+      } else {
+        res.status(200).json({ message: 'User already exists, please register with a different username.' })
+      }
+
+    } catch (error) {
+      res.status(500).json(error);
+    }
   },
   login: async (req, res) => {
     try {
@@ -28,11 +45,11 @@ module.exports = {
 
       const user = await db.User.findOne({ username: req.body.username })
       if (!user) {
-        return res.status(400).json({ message: "The username does not exist" });
+        return res.status(200).json({ message: "The username does not exist. Please check your credentials or register as a new user." });
       }
       user.comparePassword(req.body.password, (error, match) => {
         if (!match) {
-          return res.status(400).json({ message: "The password is invalid" });
+          return res.status(200).json({ message: "The password is invalid. Please check your credentials or register as a new user." });
         }
       });
       res.json({ message: "The username and password combination is correct!" });
