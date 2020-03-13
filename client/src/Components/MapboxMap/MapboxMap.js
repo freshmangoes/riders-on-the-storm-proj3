@@ -17,18 +17,18 @@ const MapboxMap = () => {
 	// initial map data:: Berkeley, CA
 	const [mapOptions, setMapOptions] = useState({
 		lat: 37.8715,
-		lng: -122.2730,
+		lng: -122.273,
 		zoom: 12
 	});
 
 	const mapContainer = useRef(null);
 
-	// loads map
+	// loads map, updates map state as the user pans the map (i think?)
 	useEffect(() => {
 		mapboxgl.accessToken =
 			'pk.eyJ1IjoiZnJlc2hndWF2YXMiLCJhIjoiY2szM3k3Y2tmMHJmYTNjczJiNDVnZzhvOCJ9.Ry3fBcfenPpbHq86OrbN0Q';
 
-		const initializeMap = ({ setMap, mapContainer }) => {
+		const initializeMap = (setMap, mapContainer) => {
 			// makes a mapbox map for the map state
 			const newMap = new mapboxgl.Map({
 				container: mapContainer.current,
@@ -44,8 +44,7 @@ const MapboxMap = () => {
 			});
 		};
 		console.log('map', map);
-
-		if (!map) initializeMap({ setMap, mapContainer });
+		if (!map) initializeMap(setMap, mapContainer);
 	}, [map]);
 
 	return <div ref={(el) => (mapContainer.current = el)} style={styles} />;
