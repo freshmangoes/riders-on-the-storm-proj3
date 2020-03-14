@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
+// import Geocoder from '@mapbox/react-geocoder';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 const styles = {
@@ -47,7 +48,7 @@ const MapboxMap = () => {
 		if (!map) initializeMap(setMap, mapContainer);
 	}, [map]);
 
-	return <div ref={(el) => (mapContainer.current = el)} style={styles} />;
+	return <div ref={el => (mapContainer.current = el)} style={styles} />;
 };
 
 export default MapboxMap;

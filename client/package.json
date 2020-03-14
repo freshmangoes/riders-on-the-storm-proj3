@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "http://localhost:3001/",
   "dependencies": {
+    "@mapbox/react-geocoder": "^2.5.0",
     "axios": "^0.18.0",
     "mapbox-gl": "^1.8.1",
     "mapbox-hooks": "^0.1.7",
