@@ -1,9 +1,6 @@
 import React from "react";
-<<<<<<< HEAD
 import "./style.css";
-=======
-import { UserLogin } from '../UserLogin';
->>>>>>> master
+import { UserLogin } from "../UserLogin/index"
 
 
 function Nav() {
