@@ -13,6 +13,7 @@ function Input() {
         <span className="input-group-text" id="basic-addon1">End</span>
         </div>
         <input type="text" className="form-control col-4"  aria-label="Username" aria-describedby="basic-addon1"></input>
+        <button type="button" className="btn btn-secondary">Search</button>
     </div>
       </div>
   );
