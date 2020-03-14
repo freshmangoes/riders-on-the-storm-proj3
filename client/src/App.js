@@ -1,5 +1,5 @@
-import MapboxMap from './Components/MapboxMap';
-import Mapboxv2 from './Components/MapboxMap-v2';
+// import MapboxMap from './Components/MapboxMap';
+import Mapv2 from './Components/Mapv2';
 
 import React from "react";
 import { UserLogin } from "./Components/UserLogin"
@@ -14,7 +14,7 @@ function App() {
       < p > Riders on the storm </p >
       <UserLogin className='col-3' />
       {/* <MapboxMap /> */}
-      <Mapboxv2/>
+      <Mapv2/>
 
     </div >
   );
