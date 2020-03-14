@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
-// import Geocoder from '@mapbox/react-geocoder';
-import '../Mapv2/node_modules/mapbox-gl/dist/mapbox-gl.css';
+// import { Geocoder } from '@mapbox/react-geocoder';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 const styles = {
 	// sets viewport to entire width, and -80px from height

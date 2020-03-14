@@ -2,7 +2,7 @@
 import Mapv2 from './Components/Mapv2';
 
 import React from "react";
-import { UserLogin } from "./Components/UserLogin"
+
 import Navbar from "./Components/Navbar"
 import Input from "./Components/Input"
 function App() {
