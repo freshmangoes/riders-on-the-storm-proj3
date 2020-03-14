@@ -1,5 +1,6 @@
 import React from "react";
-import { UserLogin } from '../UserLogin';
+import "./style.css";
+import { UserLogin } from "../UserLogin/index"
 
 
 function Nav() {
