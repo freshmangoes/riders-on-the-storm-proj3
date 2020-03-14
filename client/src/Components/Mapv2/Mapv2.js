@@ -57,8 +57,8 @@ class Mapv2 extends Component {
 					<GeolocateControl 
 						style={geolocateStyle}
 						positionOptions={{enableHighAccuracy: true}}
-						tracUserLocation={true}
-						/>
+						trackUserLocation={true}
+					/>
 					{/* FIXME :: Things get ugly when this line is uncommented. */}
 					{/* <NavigationControl /> */}
 				</ReactMapGL>
