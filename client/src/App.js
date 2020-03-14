@@ -2,7 +2,7 @@ import MapboxMap from './Components/MapboxMap';
 import React from "react";
 import { UserLogin } from "./Components/UserLogin"
 import Navbar from "./Components/Navbar"
-import Input from "./Components/Input"
+import {Input} from "./Components/Input"
 function App() {
   return (
     <div>

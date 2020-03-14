@@ -9,6 +9,9 @@ export default {
         return axios.post("/api/users/register", userData);
 
     },
+    userInput: (userInput) => {
+        return axios.post("/api/search", userInput);
+    }
     //   // Gets all books
     //   getBooks: function() {
     //     return axios.get("/api/books");
