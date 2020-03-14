@@ -13,6 +13,12 @@ TODO :: in no particular order, but definitely matters which one comes first
 */
 
 const TOKEN = 'pk.eyJ1IjoiZnJlc2hndWF2YXMiLCJhIjoiY2szM3k3Y2tmMHJmYTNjczJiNDVnZzhvOCJ9.Ry3fBcfenPpbHq86OrbN0Q';
+const geolocateStyle = {
+	position: 'absolute',
+	top: 0,
+	left: 0,
+	margin: 10
+}
 
 class Mapv2 extends Component {
 	state = {
@@ -48,8 +54,12 @@ class Mapv2 extends Component {
 					mapboxApiAccessToken = {TOKEN}
 				>
 					<Geocoder mapRef={this.map} mapboxApiAccessToken={TOKEN}/>
-					{/* FIXME :: Things get ugly when these two lines are uncommented. Want to fix how this looks. */}
-					{/* <GeolocateControl /> */}
+					<GeolocateControl 
+						style={geolocateStyle}
+						positionOptions={{enableHighAccuracy: true}}
+						tracUserLocation={true}
+						/>
+					{/* FIXME :: Things get ugly when this line is uncommented. */}
 					{/* <NavigationControl /> */}
 				</ReactMapGL>
 			</div>
