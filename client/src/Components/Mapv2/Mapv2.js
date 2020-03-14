@@ -23,7 +23,7 @@ class Mapv2 extends Component {
 	handleViewportChange = viewport => {
 		// const oldviewport = this.state.viewport;
 		this.setState({
-			viewport: {...this.state.viewport, ...viewport}
+			viewport: {...viewport}
 		});
 	}
 
