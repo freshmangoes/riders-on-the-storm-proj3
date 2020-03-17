@@ -7,8 +7,7 @@ var SearchSchema = new Schema({
   end: String
 });
 
-// This creates our model from the above schema, using mongoose's model method
+
 var Search = mongoose.model("Search", SearchSchema);
 
-// Export the Note model
 module.exports = Search;
