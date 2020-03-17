@@ -34,7 +34,7 @@ class Mapv2 extends Component {
 
 	// map reference for other map features
 	//	geocoder, geolocation, nav
-	map = React.createRef();
+	mapRef = React.createRef();
 
 	handleViewportChange = viewport => {
 		this.setState({
@@ -42,28 +42,41 @@ class Mapv2 extends Component {
 		});
 	}
 
+	handleGeocoderViewportChange = viewport => {
+		const geocoderDefaultOverrides = {transitionDuration: 1000}
+
+		return this.handleViewportChange({
+			...viewport,
+			...geocoderDefaultOverrides
+		});
+	}
+
 	render() {
 		console.log(this.state.viewport);
-		return(
-			<div className='container-fluid'>
+		return (
+			<div className="container-fluid">
 				<ReactMapGL
-					ref={this.map}
+					ref={this.mapRef}
 					{...this.state.viewport}
 					onViewportChange={this.handleViewportChange}
-					mapStyle='mapbox://styles/mapbox/streets-v11'
-					mapboxApiAccessToken = {TOKEN}
+					mapStyle="mapbox://styles/mapbox/streets-v11"
+					mapboxApiAccessToken={TOKEN}
 				>
-					<Geocoder mapRef={this.map} mapboxApiAccessToken={TOKEN}/>
-					<GeolocateControl 
+					<Geocoder
+						mapRef={this.mapRef}
+						mapboxApiAccessToken={TOKEN}
+						onViewportChange={this.handleGeocoderViewportChange}
+					/>
+					<GeolocateControl
 						style={geolocateStyle}
-						positionOptions={{enableHighAccuracy: true}}
+						positionOptions={{ enableHighAccuracy: true }}
 						trackUserLocation={true}
 					/>
 					{/* FIXME :: Things get ugly when this line is uncommented. */}
 					{/* <NavigationControl /> */}
 				</ReactMapGL>
 			</div>
-		)
+		);
 	}
 }
 
