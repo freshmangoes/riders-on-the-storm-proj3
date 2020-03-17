@@ -9,6 +9,8 @@ TODO :: in no particular order, but definitely matters which one comes first
 	- Get ReactMapGL controls working
 	- Get drawing routes working
 		- GeoJSON, deck.gl, react-leaflet???
+		- Mapbox SDK might be necessary for figuring out routes:
+			- see https://docs.mapbox.com/playground/directions/?size=n_10_n
 	- Get custom data overlays working (for weather API)
 */
 
