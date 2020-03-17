@@ -14,7 +14,7 @@ TODO :: in no particular order, but definitely matters which one comes first
 	- Get custom data overlays working (for weather API)
 */
 
-const TOKEN = 'pk.eyJ1IjoiZnJlc2hndWF2YXMiLCJhIjoiY2szM3k3Y2tmMHJmYTNjczJiNDVnZzhvOCJ9.Ry3fBcfenPpbHq86OrbN0Q';
+const TOKEN = process.env.REACT_APP_MAP_TOKEN;
 const geolocateStyle = {
 	position: 'absolute',
 	top: 0,
