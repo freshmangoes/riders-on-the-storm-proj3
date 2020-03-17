@@ -10,6 +10,8 @@ TODO :: in no particular order, but definitely matters which one comes first
 	- Get ReactMapGL controls working
 	- Get drawing routes working
 		- GeoJSON, deck.gl, react-leaflet???
+		- Mapbox SDK might be necessary for figuring out routes:
+			- see https://docs.mapbox.com/playground/directions/?size=n_10_n
 	- Get custom data overlays working (for weather API)
 */
 
@@ -35,7 +37,7 @@ class Mapv2 extends Component {
 
 	// map reference for other map features
 	//	geocoder, geolocation, nav
-	map = React.createRef();
+	mapRef = React.createRef();
 
 	handleViewportChange = viewport => {
 		this.setState({
@@ -43,29 +45,41 @@ class Mapv2 extends Component {
 		});
 	}
 
+	handleGeocoderViewportChange = viewport => {
+		const geocoderDefaultOverrides = {transitionDuration: 1000}
+
+		return this.handleViewportChange({
+			...viewport,
+			...geocoderDefaultOverrides
+		});
+	}
+
 	render() {
 		console.log(this.state.viewport);
-		console.log(process.env.REACT_APP_MAP_TOKEN, 'token')
 		return (
-			<div className='container-fluid'>
+			<div className="container-fluid">
 				<ReactMapGL
-					ref={this.map}
+					ref={this.mapRef}
 					{...this.state.viewport}
 					onViewportChange={this.handleViewportChange}
-					mapStyle='mapbox://styles/mapbox/streets-v11'
+					mapStyle="mapbox://styles/mapbox/streets-v11"
 					mapboxApiAccessToken={TOKEN}
 				>
-					<Geocoder mapRef={this.map} mapboxApiAccessToken={TOKEN} />
+					<Geocoder
+						mapRef={this.mapRef}
+						mapboxApiAccessToken={TOKEN}
+						onViewportChange={this.handleGeocoderViewportChange}
+					/>
 					<GeolocateControl
 						style={geolocateStyle}
 						positionOptions={{ enableHighAccuracy: true }}
-						tracUserLocation={true}
+						trackUserLocation={true}
 					/>
 					{/* FIXME :: Things get ugly when this line is uncommented. */}
 					{/* <NavigationControl /> */}
 				</ReactMapGL>
 			</div>
-		)
+		);
 	}
 }
 
