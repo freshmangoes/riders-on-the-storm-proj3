@@ -25,7 +25,7 @@ module.exports = {
   search: async (req, res) => {
     try {
       // console.log(req.body.username, req.body.password)
-      const search = await db.Search.fineOne({start: req.body.start, end: req.body.end })
+      const search = await db.Search.fineOne({start: req.body.start})
       if (!search) {
         db.Search.create(req.body)
           .then(dbModel => res.json({ message: 'New search added!' }))
