@@ -1,8 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ReactMapGL, { GeolocateControl, NavigationControl } from 'react-map-gl';
 import Geocoder from 'react-map-gl-geocoder';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css'
+
 
 /*
 TODO :: in no particular order, but definitely matters which one comes first
@@ -12,7 +13,7 @@ TODO :: in no particular order, but definitely matters which one comes first
 	- Get custom data overlays working (for weather API)
 */
 
-const TOKEN = 'pk.eyJ1IjoiZnJlc2hndWF2YXMiLCJhIjoiY2szM3k3Y2tmMHJmYTNjczJiNDVnZzhvOCJ9.Ry3fBcfenPpbHq86OrbN0Q';
+const TOKEN = process.env.REACT_APP_MAP_TOKEN;
 const geolocateStyle = {
 	position: 'absolute',
 	top: 0,
@@ -38,27 +39,28 @@ class Mapv2 extends Component {
 
 	handleViewportChange = viewport => {
 		this.setState({
-			viewport: {...viewport}
+			viewport: { ...viewport }
 		});
 	}
 
 	render() {
 		console.log(this.state.viewport);
-		return(
+		console.log(process.env.REACT_APP_MAP_TOKEN, 'token')
+		return (
 			<div className='container-fluid'>
 				<ReactMapGL
 					ref={this.map}
 					{...this.state.viewport}
 					onViewportChange={this.handleViewportChange}
 					mapStyle='mapbox://styles/mapbox/streets-v11'
-					mapboxApiAccessToken = {TOKEN}
+					mapboxApiAccessToken={TOKEN}
 				>
-					<Geocoder mapRef={this.map} mapboxApiAccessToken={TOKEN}/>
-					<GeolocateControl 
+					<Geocoder mapRef={this.map} mapboxApiAccessToken={TOKEN} />
+					<GeolocateControl
 						style={geolocateStyle}
-						positionOptions={{enableHighAccuracy: true}}
+						positionOptions={{ enableHighAccuracy: true }}
 						tracUserLocation={true}
-						/>
+					/>
 					{/* FIXME :: Things get ugly when this line is uncommented. */}
 					{/* <NavigationControl /> */}
 				</ReactMapGL>

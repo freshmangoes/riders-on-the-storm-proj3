@@ -27,7 +27,7 @@ const MapboxMap = () => {
 	// loads map, updates map state as the user pans the map (i think?)
 	useEffect(() => {
 		mapboxgl.accessToken =
-			'pk.eyJ1IjoiZnJlc2hndWF2YXMiLCJhIjoiY2szM3k3Y2tmMHJmYTNjczJiNDVnZzhvOCJ9.Ry3fBcfenPpbHq86OrbN0Q';
+			process.env.REACT_APP_MAP_TOKEN;
 
 		const initializeMap = (setMap, mapContainer) => {
 			// makes a mapbox map for the map state
