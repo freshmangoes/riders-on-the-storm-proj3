@@ -55,7 +55,8 @@ class Mapv2 extends Component {
 	}
 
 	render() {
-		console.log(this.state.viewport);
+		// NOTE debug
+		// console.log(this.state.viewport);
 		return (
 			<div className="container-fluid">
 				<ReactMapGL
