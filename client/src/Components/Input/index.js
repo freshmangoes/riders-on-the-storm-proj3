@@ -18,13 +18,12 @@ export const Input = props => {
 	};
 
 	const handleSearch = async event => {
-    event.preventDefault();
-    
+		event.preventDefault();
+
 		const start = await Directions.getCoords(inputData.startPoint);
 		const end = await Directions.getCoords(inputData.endPoint);
-    const route = await Directions.getRoute(start, end);
-    
-    
+		const route = await Directions.getRoute(start, end);
+
 		//--------------------------
 		// NOTE debug
 		console.log(inputData);

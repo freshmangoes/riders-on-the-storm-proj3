@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 const TOKEN = process.env.REACT_APP_MAP_TOKEN;
 
 export default {
@@ -7,7 +7,7 @@ export default {
 		const [endLon, endLat] = end;
 
 		// takes in (longitude, latitude) coordinate pairs and returns a list of coordinates for mapping
-		const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${startLon},${startLat};${endLon},${endLat}?alternatives=true&geometries=geojson&steps=true&access_token=${TOKEN}`;
+		const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${startLon},${startLat};${endLon},${endLat}?geometries=geojson&steps=true&access_token=${TOKEN}`;
 		try {
 			const data = await axios.get(url);
 			const route = data.data.routes[0].geometry.coordinates;

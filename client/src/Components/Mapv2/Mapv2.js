@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import ReactMapGL, { GeolocateControl, NavigationControl } from 'react-map-gl';
 import Geocoder from 'react-map-gl-geocoder';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css'
-
+import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 /*
 TODO :: in no particular order, but definitely matters which one comes first
@@ -21,7 +20,7 @@ const geolocateStyle = {
 	top: 0,
 	left: 0,
 	margin: 10
-}
+};
 
 class Mapv2 extends Component {
 	state = {
@@ -43,27 +42,27 @@ class Mapv2 extends Component {
 		this.setState({
 			viewport: { ...viewport }
 		});
-	}
+	};
 
 	handleGeocoderViewportChange = viewport => {
-		const geocoderDefaultOverrides = {transitionDuration: 1000}
+		const geocoderDefaultOverrides = { transitionDuration: 1000 };
 
 		return this.handleViewportChange({
 			...viewport,
 			...geocoderDefaultOverrides
 		});
-	}
+	};
 
 	render() {
 		// NOTE debug
 		// console.log(this.state.viewport);
 		return (
-			<div className="container-fluid">
+			<div className='container-fluid'>
 				<ReactMapGL
 					ref={this.mapRef}
 					{...this.state.viewport}
 					onViewportChange={this.handleViewportChange}
-					mapStyle="mapbox://styles/mapbox/streets-v11"
+					mapStyle='mapbox://styles/mapbox/streets-v11'
 					mapboxApiAccessToken={TOKEN}
 				>
 					<Geocoder
