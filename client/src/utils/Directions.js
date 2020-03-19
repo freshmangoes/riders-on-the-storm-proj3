@@ -26,7 +26,7 @@ export default {
 			const coords = data.data.features[0].center;
 			// console.log('data getCoords::', data)
 			// console.log('COORDS::', data.data.features[0].center);
-			return data.data.features[0].center;
+			return coords;
 		} catch (err) {
 			console.log('err', err);
 		}
