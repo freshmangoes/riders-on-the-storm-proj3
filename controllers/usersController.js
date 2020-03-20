@@ -25,15 +25,19 @@ module.exports = {
   create2: async (req, res) => {
     try {
       // console.log(req.body.username, req.body.password)
-
-      const user = await db.User.findOne({ username: req.body.username })
-      if (!user) {
-        db.User.create(req.body)
-          .then(dbModel => res.json({ message: 'New user has been registered!' }))
-          .catch(error => res.status(200).json({ message: error }));
+      if (!req.body.username || !req.body.password) {
+        res.status(200).json({ message: 'The username or password value is missing, please make sure to include both fields and try creating the account again.' })
       } else {
-        res.status(200).json({ message: 'User already exists, please register with a different username.' })
+        const user = await db.User.findOne({ username: req.body.username })
+        if (!user) {
+          db.User.create(req.body)
+            .then(dbModel => res.json({ message: 'New user has been registered!' }))
+            .catch(error => res.status(200).json({ message: error }));
+        } else {
+          res.status(200).json({ message: 'User already exists, please register with a different username.' })
+        }
       }
+
 
     } catch (error) {
       res.status(500).json(error);
@@ -58,7 +62,7 @@ module.exports = {
     }
   }
 
-  
+
   // update: function(req, res) {
   //   db.Book
   //     .findOneAndUpdate({ _id: req.params.id }, req.body)
