@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import ReactMapGL, { GeolocateControl } from 'react-map-gl';
+import { GeoJsonLayer } from 'deck.gl';
 import Geocoder from 'react-map-gl-geocoder';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css'
-
+import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 /*
 TODO :: in no particular order, but definitely matters which one comes first
-	- Get ReactMapGL controls working
 	- Get drawing routes working
 		- GeoJSON, deck.gl, react-leaflet???
 	- Get custom data overlays working (for weather API)
@@ -19,14 +18,11 @@ const geolocateStyle = {
 	top: 0,
 	left: 0,
 	margin: 10
-}
+};
 
 class Mapv2 extends Component {
 	state = {
 		viewport: {
-			// TODO :: Currently does not adjust viewport width and height with window. FIX THAT SOMEHOW ;)
-			width: '100vw',
-			height: '100vh',
 			latitude: 37.8715,
 			longitude: -122.273,
 			zoom: 12
@@ -35,37 +31,52 @@ class Mapv2 extends Component {
 
 	// map reference for other map features
 	//	geocoder, geolocation, nav
-	map = React.createRef();
+	mapRef = React.createRef();
 
-	handleViewportChange = viewport => {
+	handleViewportChange = (viewport) => {
+		const { width, height, ...etc } = viewport;
 		this.setState({
-			viewport: { ...viewport }
+			viewport: etc
 		});
-	}
+	};
+
+	handleGeocoderViewportChange = (viewport) => {
+		const geocoderDefaultOverrides = { transitionDuration: 1200 };
+
+		return this.handleViewportChange({
+			...viewport,
+			...geocoderDefaultOverrides
+		});
+	};
 
 	render() {
-		console.log(this.state.viewport);
-		console.log(process.env.REACT_APP_MAP_TOKEN, 'token')
+		// NOTE debug
+		// console.log(this.state.viewport);
+		const { viewport } = this.state;
 		return (
-			<div className='container-fluid'>
+			<div className="container-fluid">
 				<ReactMapGL
-					ref={this.map}
-					{...this.state.viewport}
-					onViewportChange={this.handleViewportChange}
-					mapStyle='mapbox://styles/mapbox/streets-v11'
+					ref={this.mapRef}
+					width="100vw"
+					height="100vh"
+					{...viewport}
+					onViewportChange={(viewport) => this.handleViewportChange(viewport)}
+					mapStyle="mapbox://styles/mapbox/streets-v11"
 					mapboxApiAccessToken={TOKEN}
 				>
-					<Geocoder mapRef={this.map} mapboxApiAccessToken={TOKEN} />
+					<Geocoder
+						mapRef={this.mapRef}
+						mapboxApiAccessToken={TOKEN}
+						onViewportChange={this.handleGeocoderViewportChange}
+					/>
 					<GeolocateControl
 						style={geolocateStyle}
 						positionOptions={{ enableHighAccuracy: true }}
-						tracUserLocation={true}
+						trackUserLocation={true}
 					/>
-					{/* FIXME :: Things get ugly when this line is uncommented. */}
-					{/* <NavigationControl /> */}
 				</ReactMapGL>
 			</div>
-		)
+		);
 	}
 }
 
