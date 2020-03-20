@@ -32,14 +32,14 @@ class Mapv2 extends Component {
 	//	geocoder, geolocation, nav
 	mapRef = React.createRef();
 
-	handleViewportChange = viewport => {
-		const {width, height, ...etc} = viewport;
+	handleViewportChange = (viewport) => {
+		const { width, height, ...etc } = viewport;
 		this.setState({
 			viewport: etc
 		});
 	};
 
-	handleGeocoderViewportChange = viewport => {
+	handleGeocoderViewportChange = (viewport) => {
 		const geocoderDefaultOverrides = { transitionDuration: 1000 };
 
 		return this.handleViewportChange({
@@ -51,16 +51,16 @@ class Mapv2 extends Component {
 	render() {
 		// NOTE debug
 		// console.log(this.state.viewport);
-		const {viewport} = this.state;
+		const { viewport } = this.state;
 		return (
-			<div className='container-fluid'>
+			<div className="container-fluid">
 				<ReactMapGL
 					ref={this.mapRef}
-					width='100vw'
-					height='100vh'
+					width="100vw"
+					height="100vh"
 					{...viewport}
-					onViewportChange={viewport => this.handleViewportChange(viewport)}
-					mapStyle='mapbox://styles/mapbox/streets-v11'
+					onViewportChange={(viewport) => this.handleViewportChange(viewport)}
+					mapStyle="mapbox://styles/mapbox/streets-v11"
 					mapboxApiAccessToken={TOKEN}
 				>
 					<Geocoder
