@@ -1,7 +1,6 @@
 import React from "react";
 import "./style.css";
-import { UserLogin } from "../UserLogin/index"
-
+import { UserLoginModal } from "../UserLoginModal/index"
 
 function Nav() {
   return (
@@ -9,7 +8,8 @@ function Nav() {
       <a className="navbar-brand" href="/">
         Riders on the Storm
       </a>
-      <UserLogin className='  bg-dark rounded-0 text-light  p-2 text-right' />
+      <UserLoginModal buttonLabel='Sign In / Register' />
+
     </nav>
   );
 }

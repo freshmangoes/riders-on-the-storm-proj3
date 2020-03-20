@@ -4,7 +4,8 @@ var Schema = mongoose.Schema;
 
 var SearchSchema = new Schema({
   start: String,
-  end: String 
+  end: String,
+  userId: Schema.Types.ObjectId
 });
 
 
