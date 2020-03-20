@@ -6,11 +6,8 @@ import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 /*
 TODO :: in no particular order, but definitely matters which one comes first
-	- Get ReactMapGL controls working
 	- Get drawing routes working
 		- GeoJSON, deck.gl, react-leaflet???
-		- Mapbox SDK might be necessary for figuring out routes:
-			- see https://docs.mapbox.com/playground/directions/?size=n_10_n
 	- Get custom data overlays working (for weather API)
 */
 
@@ -25,9 +22,6 @@ const geolocateStyle = {
 class Mapv2 extends Component {
 	state = {
 		viewport: {
-			// TODO :: Currently does not adjust viewport width and height with window. FIX THAT SOMEHOW ;)
-			width: '100vw',
-			height: '100vh',
 			latitude: 37.8715,
 			longitude: -122.273,
 			zoom: 12
@@ -39,8 +33,9 @@ class Mapv2 extends Component {
 	mapRef = React.createRef();
 
 	handleViewportChange = viewport => {
+		const {width, height, ...etc} = viewport;
 		this.setState({
-			viewport: { ...viewport }
+			viewport: etc
 		});
 	};
 
@@ -56,12 +51,15 @@ class Mapv2 extends Component {
 	render() {
 		// NOTE debug
 		// console.log(this.state.viewport);
+		const {viewport} = this.state;
 		return (
 			<div className='container-fluid'>
 				<ReactMapGL
 					ref={this.mapRef}
-					{...this.state.viewport}
-					onViewportChange={this.handleViewportChange}
+					width='100vw'
+					height='100vh'
+					{...viewport}
+					onViewportChange={viewport => this.handleViewportChange(viewport)}
 					mapStyle='mapbox://styles/mapbox/streets-v11'
 					mapboxApiAccessToken={TOKEN}
 				>
@@ -75,8 +73,6 @@ class Mapv2 extends Component {
 						positionOptions={{ enableHighAccuracy: true }}
 						trackUserLocation={true}
 					/>
-					{/* FIXME :: Things get ugly when this line is uncommented. */}
-					{/* <NavigationControl /> */}
 				</ReactMapGL>
 			</div>
 		);
