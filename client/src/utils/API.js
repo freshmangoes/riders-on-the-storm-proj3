@@ -1,4 +1,7 @@
 import axios from "axios";
+const Mapv2 = require("../../components/Mapv2");
+
+
 
 export default {
     // Try to Login
@@ -11,7 +14,7 @@ export default {
     },
     userInput: (userInput) => {
         return axios.post("/api/search", userInput);
-    }
+    },
     //   // Gets all books
     //   getBooks: function() {
     //     return axios.get("/api/books");
@@ -29,26 +32,12 @@ export default {
     //     return axios.post("/api/books", bookData);
     //   }
 
-    const getComboData = async (search, radius) => {
-        // async function to get weather data
-        const getWeather = async (search) => {
-            // city search parameter
-            const city = search;
-            // api key from dotenv
-            const apiKey = process.env.openWeather;
-            // get url for weather
-            //  uses a search for a city
-            const weatherUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
-            // initialize data to be returned at the end
-            let data;
-            // es8 form factor promise to get data from api
-            try {
-                data = await axios.get(weatherUrl);
-            } catch (err) {
-                console.error('err::', err);
-            }
-            // return relevant json from data
-            return data.data;
-        };
-        
-};
+    getWeather: (search) => {
+        // lat and lon search parameter
+        const {lat,lon} = search;
+        // get url for weather
+        const weatherUrl = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_OPEN_WEATHER_API_KEY}`;
+        // initialize data to be returned at the end
+        return axios.get(weatherUrl)
+    } 
+}
