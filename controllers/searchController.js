@@ -24,16 +24,16 @@ module.exports = {
   // },
   search: async (req, res) => {
     try {
-      console.log(req.body, 'search body')
+      // console.log(req.body, 'search body')
       const search = await db.Search.findOne({ start: req.body.start })
 
       if (!search) {
-        console.log('adding', req.body)
+        // console.log('adding', req.body)
         db.Search.create(req.body)
           .then(dbModel => res.json({ message: 'New search added!' }))
           .catch(error => res.status(200).json({ message: error }));
       } else {
-        console.log('exists', req.body)
+        // console.log('exists', req.body)
         res.status(200).json({ message: 'Invalid' })
       }
 
