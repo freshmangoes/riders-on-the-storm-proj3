@@ -10,7 +10,7 @@ export default {
 
     },
     userInput: (userInput) => {
-        return axios.post("/api/search", userInput);
+        return axios.post("/api/search/search", userInput);
     }
     //   // Gets all books
     //   getBooks: function() {
