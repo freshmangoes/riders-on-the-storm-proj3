@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactMapGL, { GeolocateControl } from 'react-map-gl';
-import {GeoJsonLayer} from 'deck.gl';
+import { GeoJsonLayer } from 'deck.gl';
 import Geocoder from 'react-map-gl-geocoder';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
@@ -41,7 +41,7 @@ class Mapv2 extends Component {
 	};
 
 	handleGeocoderViewportChange = (viewport) => {
-		const geocoderDefaultOverrides = { transitionDuration: 1000 };
+		const geocoderDefaultOverrides = { transitionDuration: 1200 };
 
 		return this.handleViewportChange({
 			...viewport,

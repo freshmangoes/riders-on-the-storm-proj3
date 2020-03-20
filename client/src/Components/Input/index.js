@@ -3,7 +3,7 @@ import API from '../../utils/API';
 import './style.css';
 import Directions from '../../utils/Directions';
 
-export const Input = props => {
+const Input = props => {
 	const [inputData, setInputData] = useState({
 		startPoint: 'San Francisco, CA',
 		endPoint: 'Santa Cruz, CA'
@@ -86,3 +86,5 @@ export const Input = props => {
 		</div>
 	);
 };
+
+export default Input;
