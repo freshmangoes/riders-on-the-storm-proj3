@@ -24,23 +24,27 @@ module.exports = {
   // },
   search: async (req, res) => {
     try {
-      // console.log(req.body.username, req.body.password)
-      const search = await db.Search.fineOne({start: req.body.start})
+      console.log(req.body, 'search body')
+      const search = await db.Search.findOne({ start: req.body.start })
+
       if (!search) {
+        console.log('adding', req.body)
         db.Search.create(req.body)
           .then(dbModel => res.json({ message: 'New search added!' }))
           .catch(error => res.status(200).json({ message: error }));
       } else {
+        console.log('exists', req.body)
         res.status(200).json({ message: 'Invalid' })
       }
 
     } catch (error) {
+      console.log('err', error)
       res.status(500).json(error);
     }
   },
 
 
-  
+
   // update: function(req, res) {
   //   db.Book
   //     .findOneAndUpdate({ _id: req.params.id }, req.body)
