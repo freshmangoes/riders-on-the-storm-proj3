@@ -9,12 +9,13 @@ export default {
         return axios.post("/api/users/login", userData);
     },
     userRegister: (userData) => {
-        return axios.post("/api/search/search", userInput);
+        return axios.post("/api/users/register", userData);
 
 
     },
     userInput: (userInput) => {
-        return axios.post("/api/search", userInput);
+        return axios.post("/api/search/search", userInput);
+
     },
     //   // Gets all books
     //   getBooks: function() {
