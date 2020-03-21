@@ -1,5 +1,4 @@
 import axios from "axios";
-const Mapv2 = require("../../components/Mapv2");
 
 
 
@@ -36,10 +35,10 @@ export default {
 
     getWeather: (search) => {
         // lat and lon search parameter
-        const {lat,lon} = search;
+        const { lat, lon } = search;
         // get url for weather
         const weatherUrl = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_OPEN_WEATHER_API_KEY}`;
         // initialize data to be returned at the end
         return axios.get(weatherUrl)
-    } 
+    }
 }
