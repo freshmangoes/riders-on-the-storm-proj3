@@ -15,6 +15,10 @@ export default {
         return axios.post("/api/search/search", userInput);
 
     },
+    pastSearches: (id) => {
+        return axios.get(`/api/search/findById/${id}`);
+
+    },
     //   // Gets all books
     //   getBooks: function() {
     //     return axios.get("/api/books");

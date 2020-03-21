@@ -6,8 +6,8 @@ import { UserLoggedInContext } from '../../Context/UserLoggedInContext';
 
 export const UserLogin = (props) => {
 
-    const { currentUserId, setCurrentUserId } = useContext(CurrentUserIdContext);
-    const { userLoggedIn, setUserLoggedIn } = useContext(UserLoggedInContext);
+    const { setCurrentUserId } = useContext(CurrentUserIdContext);
+    const { setUserLoggedIn } = useContext(UserLoggedInContext);
 
     const [formData, setFormData] = useState({
         username: '',
