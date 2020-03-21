@@ -5,6 +5,8 @@ import Geocoder from 'react-map-gl-geocoder';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
+import { RouteContext } from '../Input/';
+
 /*
 TODO :: in no particular order, but definitely matters which one comes first
 	- Get drawing routes working
@@ -34,6 +36,9 @@ class Mapv2 extends Component {
 	mapRef = React.createRef();
 
 	handleViewportChange = (viewport) => {
+		// NOTE debug
+		// Placed console.log here because it makes it easy to call by moving the map viewport.
+		console.log('RouteContext', RouteContext);
 		const { width, height, ...etc } = viewport;
 		this.setState({
 			viewport: etc
@@ -50,8 +55,6 @@ class Mapv2 extends Component {
 	};
 
 	render() {
-		// NOTE debug
-		// console.log(this.state.viewport);
 		const { viewport } = this.state;
 		return (
 			<div className="container-fluid">

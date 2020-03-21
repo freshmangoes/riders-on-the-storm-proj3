@@ -1,17 +1,21 @@
 
 import React from "react";
 import Navbar from "./Components/Navbar"
-import Input from "./Components/Input"
+import {Input, RouteContext} from "./Components/Input"
 import Mapv2 from './Components/Mapv2'
 
 function App() {
   return (
-    <div>
-      <Navbar />
-      <Input />
+    <RouteContext.Provider value = {null}>
 
-      <Mapv2 />
-    </div>
+      <div>
+        <Navbar />
+        <Input />
+
+        <Mapv2 />
+      </div>
+      
+    </RouteContext.Provider>
   );
 }
 

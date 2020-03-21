@@ -1,7 +1,4 @@
 import axios from "axios";
-const Mapv2 = require("../../components/Mapv2");
-
-
 
 export default {
     // Try to Login
