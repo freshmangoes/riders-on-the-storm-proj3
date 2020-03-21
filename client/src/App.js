@@ -1,17 +1,26 @@
 
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "./Components/Navbar"
 import Input from "./Components/Input"
 import Mapv2 from './Components/Mapv2'
+import { CurrentUserIdContext } from './Context/CurrentUserIdContext';
+import { UserLoggedInContext } from './Context/UserLoggedInContext';
 
 function App() {
-  return (
-    <div>
-      <Navbar />
-      <Input />
+  const [userLoggedIn, setUserLoggedIn] = useState(false);
+  const [currentUserId, setCurrentUserId] = useState('');
 
-      <Mapv2 />
-    </div>
+  return (
+    <UserLoggedInContext.Provider value={{ userLoggedIn, setUserLoggedIn }}>
+      <CurrentUserIdContext.Provider value={{ currentUserId, setCurrentUserId }}>
+        <div>
+          <Navbar />
+          <Input />
+
+          <Mapv2 />
+        </div>
+      </CurrentUserIdContext.Provider >
+    </UserLoggedInContext.Provider >
   );
 }
 

@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import API from '../../utils/API';
 import { Button, Form, Input } from 'reactstrap';
+import { CurrentUserIdContext } from '../../Context/CurrentUserIdContext';
+import { UserLoggedInContext } from '../../Context/UserLoggedInContext';
 
 export const UserLogin = (props) => {
+
+    const { setCurrentUserId } = useContext(CurrentUserIdContext);
+    const { setUserLoggedIn } = useContext(UserLoggedInContext);
+
     const [formData, setFormData] = useState({
         username: '',
         password: ''
@@ -23,8 +29,11 @@ export const UserLogin = (props) => {
         event.preventDefault();
         console.log(formData);
         API.userLogin(formData).then((data) => {
-            if (data.data.message === "Success") {
+            if (data.data.message === "The username and password combination is correct!") {
                 alert(`You are logged in!`);
+                setUserLoggedIn(true);
+                setCurrentUserId(data.data.id);
+                props.toggle();
             } else {
                 alert(data.data.message);
                 props.toggle();

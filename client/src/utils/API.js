@@ -1,7 +1,6 @@
 import axios from "axios";
 
 
-
 export default {
     // Try to Login
     userLogin: (userData) => {
@@ -14,6 +13,10 @@ export default {
     },
     userInput: (userInput) => {
         return axios.post("/api/search/search", userInput);
+
+    },
+    pastSearches: (id) => {
+        return axios.get(`/api/search/findById/${id}`);
 
     },
     //   // Gets all books
