@@ -9,7 +9,8 @@ export default {
         return axios.post("/api/users/login", userData);
     },
     userRegister: (userData) => {
-        return axios.post("/api/users/register", userData);
+        return axios.post("/api/search/search", userInput);
+
 
     },
     userInput: (userInput) => {
