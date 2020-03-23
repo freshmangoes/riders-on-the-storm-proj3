@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactMapGL, { GeolocateControl } from 'react-map-gl';
-import { GeoJsonLayer } from 'deck.gl';
+import DeckGL, { GeoJsonLayer } from 'deck.gl';
 import Geocoder from 'react-map-gl-geocoder';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
@@ -56,6 +56,26 @@ class Mapv2 extends Component {
 
 	render() {
 		const { viewport } = this.state;
+		const geoJsonData = RouteContext._currentValue;
+		const layer = new GeoJsonLayer({
+			id: 'geojson-layer',
+			data: geoJsonData,
+			pickable: true,
+			stroked: false,
+			filled: true,
+			extruded: true,
+			lineWidthScale: 20,
+			lineWidthMinPixels: 2,
+			getFillColor: [160, 160, 180, 200],
+			// getLineColor: d => colorToRGBArray(d.properties.color),
+			getRadius: 100,
+			getLineWidth: 1,
+			getElevation: 30,
+			// onHover: ({object, x, y}) => {
+			// 	const tooltip = object.properties.name || object.properties.station;
+			// }
+		});
+
 		return (
 			<div className="container-fluid">
 				<ReactMapGL
@@ -76,6 +96,11 @@ class Mapv2 extends Component {
 						style={geolocateStyle}
 						positionOptions={{ enableHighAccuracy: true }}
 						trackUserLocation={true}
+					/>
+					<DeckGL
+						mapRef={this.mapRef} 
+						layers={layer}
+						viewState={viewport}
 					/>
 				</ReactMapGL>
 			</div>
