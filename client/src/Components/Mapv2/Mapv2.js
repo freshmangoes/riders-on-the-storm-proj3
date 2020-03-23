@@ -57,6 +57,9 @@ class Mapv2 extends Component {
 	render() {
 		const { viewport } = this.state;
 		const geoJsonData = RouteContext._currentValue;
+
+		// NOTE
+		// Creates GeoJson line for route when searched, currently only gets updated and drawn on the map when the viewport is updated, currently a WIP.
 		const layer = new GeoJsonLayer({
 			id: 'geojson-layer',
 			data: geoJsonData,
@@ -92,15 +95,15 @@ class Mapv2 extends Component {
 						mapboxApiAccessToken={TOKEN}
 						onViewportChange={this.handleGeocoderViewportChange}
 					/>
-					<GeolocateControl
-						style={geolocateStyle}
-						positionOptions={{ enableHighAccuracy: true }}
-						trackUserLocation={true}
-					/>
 					<DeckGL
 						mapRef={this.mapRef} 
 						layers={layer}
 						viewState={viewport}
+					/>
+					<GeolocateControl
+						style={geolocateStyle}
+						positionOptions={{ enableHighAccuracy: true }}
+						trackUserLocation={true}
 					/>
 				</ReactMapGL>
 			</div>
