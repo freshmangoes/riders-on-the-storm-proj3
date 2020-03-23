@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import API from '../../utils/API';
 import './style.css';
 import Directions from '../../utils/Directions';
+// import { Row, Col, InputGroup, InputGroupAddon, Button } from "reactstrap";
 
 const Input = props => {
 	const [inputData, setInputData] = useState({
@@ -45,44 +46,45 @@ const Input = props => {
 	};
 
 	return (
-		<div {...props}>
-			<div className='input-group mb-3'>
-				<div className='input-group-prepend'>
-					<span className='input-group-text' id='basic-addon1'>
+		<div {...props} id="inputForm">
+			<form className="form-inline mb-4">
+				<div className='form-group'>
+					<label>
 						Start
-					</span>
-				</div>
+					</label>
 				<input
 					type='text'
-					className='form-control col-4'
+					className="form-control"
 					aria-label='Start'
 					aria-describedby='basic-addon1'
 					name='startPoint'
-					defaultValue='San Francisco,CA'
+					defaultValue='Address'
 					onChange={handleInputChange}
 				></input>
-				<div className='input-group-prepend'>
-					<span className='input-group-text' id='basic-addon1'>
-						End
-					</span>
 				</div>
+				<div className='form-group'>
+					<label>
+						End
+					</label>
 				<input
 					type='text'
-					className='form-control col-4'
+					className='form-control'
 					aria-label='End'
 					aria-describedby='basic-addon1'
 					name='endPoint'
-					defaultValue='Santa Cruz,CA'
+					defaultValue='Address'
 					onChange={handleInputChange}
 				></input>
+				</div>
 				<button
 					type='button'
 					className='btn btn-secondary text-body'
 					onClick={handleSearch}
 				>
 					Search
-				</button>
-			</div>
+				</button>	
+					
+				</form>
 		</div>
 	);
 };

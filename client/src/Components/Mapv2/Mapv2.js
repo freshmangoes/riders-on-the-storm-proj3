@@ -5,6 +5,7 @@ import Geocoder from 'react-map-gl-geocoder';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
+
 /*
 TODO :: in no particular order, but definitely matters which one comes first
 	- Get drawing routes working
@@ -55,10 +56,11 @@ class Mapv2 extends Component {
 		const { viewport } = this.state;
 		return (
 			<div className="container-fluid">
-				<ReactMapGL
+				
+					<ReactMapGL
 					ref={this.mapRef}
-					width="100vw"
-					height="100vh"
+					width="78.5vw"
+					height="80vh"
 					{...viewport}
 					onViewportChange={(viewport) => this.handleViewportChange(viewport)}
 					mapStyle="mapbox://styles/mapbox/streets-v11"
@@ -74,7 +76,10 @@ class Mapv2 extends Component {
 						positionOptions={{ enableHighAccuracy: true }}
 						trackUserLocation={true}
 					/>
-				</ReactMapGL>
+						</ReactMapGL>
+				
+				
+				
 			</div>
 		);
 	}
