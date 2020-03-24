@@ -34,7 +34,7 @@ module.exports = {
           .catch(error => res.status(200).json({ message: error }));
       } else {
         // console.log('Invalid', req.body)
-        res.status(200).json({ message: 'Invalid' })
+        res.status(200).json({ message: 'Search exists!' })
       }
 
     } catch (error) {

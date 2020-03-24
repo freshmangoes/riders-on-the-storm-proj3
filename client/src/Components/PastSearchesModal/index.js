@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, Card, CardBody } from 'reactstrap';
 import API from '../../utils/API';
+import { SearchInputContext } from '../../Context/SearchInputContext';
 
 export const PastSearchesModal = (props) => {
+    const { setSearchInput } = useContext(SearchInputContext)
+
     const {
         buttonLabel,
         className,
@@ -37,7 +40,11 @@ export const PastSearchesModal = (props) => {
                 <ModalBody>
                     Past Searches here.
                     {searchResults.map((res, index) => {
-                    return <Card key={index} onClick={() => { console.log('you clicked ', index, res.start, res.end); toggle() }
+                    return <Card key={index} onClick={() => {
+                        console.log('you clicked ', index, res.start, res.end); setSearchInput({
+                            startPoint: res.start, endPoint: res.end
+                        }); toggle()
+                    }
                     }>
                         <CardBody>
                             <p>Start: {res.start}</p>
