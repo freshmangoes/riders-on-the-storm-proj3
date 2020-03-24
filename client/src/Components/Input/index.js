@@ -62,7 +62,7 @@ const Input = (props) => {
 					aria-label="Start"
 					aria-describedby="basic-addon1"
 					name="startPoint"
-					defaultValue="San Francisco,CA"
+					defaultValue="San Francisco, CA"
 					onChange={handleInputChange}
 				></input>
 				<div className="input-group-prepend">
@@ -76,7 +76,7 @@ const Input = (props) => {
 					aria-label="End"
 					aria-describedby="basic-addon1"
 					name="endPoint"
-					defaultValue="Santa Cruz,CA"
+					defaultValue="Santa Cruz, CA"
 					onChange={handleInputChange}
 				></input>
 				<button

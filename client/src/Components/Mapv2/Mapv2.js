@@ -70,7 +70,7 @@ class Mapv2 extends Component {
 			lineWidthScale: 20,
 			lineWidthMinPixels: 2,
 			getFillColor: [160, 160, 180, 200],
-			// getLineColor: d => colorToRGBArray(d.properties.color),
+			getLineColor: [255, 0, 0, 255],
 			getRadius: 100,
 			getLineWidth: 1,
 			getElevation: 30,
@@ -82,14 +82,14 @@ class Mapv2 extends Component {
 		});
 
 		return (
-			<div className="container-fluid">
+			<div className='container-fluid'>
 				<ReactMapGL
 					ref={this.mapRef}
-					width="100vw"
-					height="100vh"
+					width='100vw'
+					height='100vh'
 					{...viewport}
 					onViewportChange={(viewport) => this.handleViewportChange(viewport)}
-					mapStyle="mapbox://styles/mapbox/streets-v11"
+					mapStyle='mapbox://styles/mapbox/streets-v11'
 					mapboxApiAccessToken={TOKEN}
 				>
 					<Geocoder
