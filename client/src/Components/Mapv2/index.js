@@ -1,1 +1,1 @@
-export { default } from './Mapv2';
+export { default } from './Mapv2.js';

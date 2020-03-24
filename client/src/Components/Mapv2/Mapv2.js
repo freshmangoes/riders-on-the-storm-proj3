@@ -5,7 +5,7 @@ import Geocoder from 'react-map-gl-geocoder';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
-import { RouteContext } from '../Input/';
+import { RouteContext } from '../../Context/RouteContext';
 
 /*
 TODO :: in no particular order, but definitely matters which one comes first
@@ -23,13 +23,31 @@ const geolocateStyle = {
 };
 
 class Mapv2 extends Component {
+	static contextType = RouteContext;
+
+
+
 	state = {
 		viewport: {
 			latitude: 37.8715,
 			longitude: -122.273,
 			zoom: 12
-		}
+		},
+		route: {}
+
 	};
+
+	componentDidMount() {
+		this.state.route = this.context.route
+
+		console.log('mount', this.context) //testing
+	}
+
+	componentDidUpdate() {
+		console.log('update', this.context)
+		this.state.route = this.context.route
+		// this.handleGeocoderViewportChange();
+	}
 
 	// map reference for other map features
 	//	geocoder, geolocation, nav
@@ -56,7 +74,7 @@ class Mapv2 extends Component {
 
 	render() {
 		const { viewport } = this.state;
-		const geoJsonData = RouteContext._currentValue;
+		const geoJsonData = this.state.route;
 
 		// NOTE
 		// Creates GeoJson line for route when searched, currently only gets updated and drawn on the map when the viewport is updated, currently a WIP.
@@ -96,7 +114,7 @@ class Mapv2 extends Component {
 						onViewportChange={this.handleGeocoderViewportChange}
 					/>
 					<DeckGL
-						mapRef={this.mapRef} 
+						mapRef={this.mapRef}
 						layers={layer}
 						viewState={viewport}
 					/>
