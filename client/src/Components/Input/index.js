@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import API from '../../utils/API';
 import './style.css';
 import Directions from '../../utils/Directions';
@@ -7,25 +7,27 @@ import Directions from '../../utils/Directions';
 import { CurrentUserIdContext } from '../../Context/CurrentUserIdContext';
 import { UserLoggedInContext } from '../../Context/UserLoggedInContext';
 import { RouteContext } from '../../Context/RouteContext';
+import { SearchInputContext } from '../../Context/SearchInputContext';
 
 const Input = props => {
 	// for user login context:
 	const { currentUserId } = useContext(CurrentUserIdContext);
 	const { userLoggedIn } = useContext(UserLoggedInContext);
 	const { route, setRoute } = useContext(RouteContext);
+	const { searchInput, setSearchInput } = useContext(SearchInputContext);
 
-	const [inputData, setInputData] = useState({
-		startPoint: 'San Francisco, CA',
-		endPoint: 'Santa Cruz, CA'
-	});
+	const [inputData, setInputData] = useState(searchInput);
 	const handleInputChange = (event) => {
 		const { name, value } = event.target;
 
-		setInputData({
+		setSearchInput({
 			...inputData,
 			[name]: value
 		});
+
+		setInputData(searchInput)
 	};
+	useEffect(() => setInputData(searchInput));
 
 	const handleSearch = async (event) => {
 		event.preventDefault();
@@ -56,10 +58,13 @@ const Input = props => {
 				.then(data => {
 					if (data.data.message === 'Success') {
 						alert(`Added to search history`);
+					} else if (data.data.message === 'Search exists!') {
+						console.log(data.data.message);
 					} else {
 						alert(data.data.message);
+						console.log(data.data.message);
 					}
-					console.log(data.data.message);
+
 				})
 				.catch(err => console.log(err));
 		}
@@ -81,7 +86,7 @@ const Input = props => {
 					aria-label="Start"
 					aria-describedby="basic-addon1"
 					name="startPoint"
-					defaultValue="San Francisco,CA"
+					value={inputData.startPoint}
 					onChange={handleInputChange}
 				></input>
 				<div className="input-group-prepend">
@@ -95,7 +100,7 @@ const Input = props => {
 					aria-label="End"
 					aria-describedby="basic-addon1"
 					name="endPoint"
-					defaultValue="Santa Cruz,CA"
+					value={inputData.endPoint}
 					onChange={handleInputChange}
 				></input>
 				<button
