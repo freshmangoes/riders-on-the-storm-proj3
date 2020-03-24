@@ -4,7 +4,7 @@ import DeckGL, { GeoJsonLayer } from 'deck.gl';
 import Geocoder from 'react-map-gl-geocoder';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
-
+import API from '../../utils/API';
 import { RouteContext } from '../../Context/RouteContext';
 
 /*
@@ -71,6 +71,12 @@ class Mapv2 extends Component {
 			...geocoderDefaultOverrides
 		});
 	};
+	// method for use when clicking route for weather:
+
+	showWeather = (latLongObj) => {
+		API.getWeather(latLongObj).then(data =>
+			console.log(data))
+	}
 
 	render() {
 		const { viewport } = this.state;
@@ -90,12 +96,13 @@ class Mapv2 extends Component {
 			getFillColor: [160, 160, 180, 200],
 			getLineColor: [255, 0, 0, 255],
 			getRadius: 100,
-			getLineWidth: 1,
+			getLineWidth: 10,
 			getElevation: 30,
 			onClick: (info, event) => {
 				// info houses the coordinates
 				console.log('info', info);
 				console.log('event', event);
+				this.showWeather({ lat: info.lngLat[1], lon: info.lngLat[0] });
 			}
 		});
 
