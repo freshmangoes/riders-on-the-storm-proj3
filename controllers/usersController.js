@@ -56,7 +56,7 @@ module.exports = {
           return res.status(200).json({ message: "The password is invalid. Please check your credentials or register as a new user." });
         }
       });
-      res.json({ message: "The username and password combination is correct!" });
+      res.json({ message: "The username and password combination is correct!", id: user._id });
     } catch (error) {
       res.status(500).json(error);
     }

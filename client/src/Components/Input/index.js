@@ -1,12 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import API from '../../utils/API';
 import './style.css';
 import Directions from '../../utils/Directions';
 
-let route;
-let RouteContext = React.createContext();
+// importing user log in context things
+import { CurrentUserIdContext } from '../../Context/CurrentUserIdContext';
+import { UserLoggedInContext } from '../../Context/UserLoggedInContext';
+import { RouteContext } from '../../Context/RouteContext';
 
-const Input = (props) => {
+const Input = props => {
+	// for user login context:
+	const { currentUserId } = useContext(CurrentUserIdContext);
+	const { userLoggedIn } = useContext(UserLoggedInContext);
+	const { route, setRoute } = useContext(RouteContext);
+
 	const [inputData, setInputData] = useState({
 		startPoint: 'San Francisco, CA',
 		endPoint: 'Santa Cruz, CA'
@@ -25,27 +32,39 @@ const Input = (props) => {
 
 		const start = await Directions.getCoords(inputData.startPoint);
 		const end = await Directions.getCoords(inputData.endPoint);
-		route = await Directions.getRoute(start, end);
-		RouteContext = React.createContext(route);
+		const newRoute = await Directions.getRoute(start, end);
+		setRoute(newRoute);
+
 		//--------------------------
 		// NOTE debug
 		console.log(inputData);
 		console.log('start', start);
 		console.log('end', end);
-		console.log('route', route);
+		console.log('route', newRoute, route);
 		console.log('RouteContext::', RouteContext);
 		//--------------------------
 
-		API.userInput(inputData)
-			.then((data) => {
-				if (data.data.message === 'Success') {
-					alert(`Added to search history`);
-				} else {
-					alert(data.data.message);
-				}
-				console.log(data.data.message);
-			})
-			.catch((err) => console.log(err));
+		// creating if statement so that searches are only saved if the user is logged in:
+		if (userLoggedIn) {
+			const apiInputData = {
+				start: inputData.startPoint,
+				end: inputData.endPoint,
+				userId: currentUserId
+
+			}
+			API.userInput(apiInputData)
+				.then(data => {
+					if (data.data.message === 'Success') {
+						alert(`Added to search history`);
+					} else {
+						alert(data.data.message);
+					}
+					console.log(data.data.message);
+				})
+				.catch(err => console.log(err));
+		}
+
+
 	};
 
 	return (

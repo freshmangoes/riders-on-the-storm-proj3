@@ -9,12 +9,12 @@ module.exports = {
   //     .then(dbModel => res.json(dbModel))
   //     .catch(err => res.status(422).json(err));
   // },
-  // findById: function(req, res) {
-  //   db.Book
-  //     .findById(req.params.id)
-  //     .then(dbModel => res.json(dbModel))
-  //     .catch(err => res.status(422).json(err));
-  // },
+  findById: function (req, res) {
+    db.Search
+      .find({ userId: req.params.id })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
   // create: (req, res) => {
   //   // console.log(req.body);
   //   db.User
@@ -33,7 +33,7 @@ module.exports = {
           .then(dbModel => res.json({ message: 'New search added!' }))
           .catch(error => res.status(200).json({ message: error }));
       } else {
-        // console.log('exists', req.body)
+        // console.log('Invalid', req.body)
         res.status(200).json({ message: 'Invalid' })
       }
 
