@@ -88,13 +88,15 @@ class Mapv2 extends Component {
 			lineWidthScale: 20,
 			lineWidthMinPixels: 2,
 			getFillColor: [160, 160, 180, 200],
-			// getLineColor: d => colorToRGBArray(d.properties.color),
+			getLineColor: [255, 0, 0, 255],
 			getRadius: 100,
 			getLineWidth: 1,
 			getElevation: 30,
-			// onHover: ({object, x, y}) => {
-			// 	const tooltip = object.properties.name || object.properties.station;
-			// }
+			onClick: (info, event) => {
+				// info houses the coordinates
+				console.log('info', info);
+				console.log('event', event);
+			}
 		});
 
 		return (
