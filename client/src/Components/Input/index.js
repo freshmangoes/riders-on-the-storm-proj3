@@ -6,18 +6,19 @@ import Directions from '../../utils/Directions';
 // importing user log in context things
 import { CurrentUserIdContext } from '../../Context/CurrentUserIdContext';
 import { UserLoggedInContext } from '../../Context/UserLoggedInContext';
+import { RouteContext } from '../../Context/RouteContext';
 
 const Input = props => {
 	// for user login context:
 	const { currentUserId } = useContext(CurrentUserIdContext);
 	const { userLoggedIn } = useContext(UserLoggedInContext);
-
+	const { route, setRoute } = useContext(RouteContext);
 
 	const [inputData, setInputData] = useState({
 		startPoint: 'San Francisco, CA',
 		endPoint: 'Santa Cruz, CA'
 	});
-	const handleInputChange = event => {
+	const handleInputChange = (event) => {
 		const { name, value } = event.target;
 
 		setInputData({
@@ -26,19 +27,21 @@ const Input = props => {
 		});
 	};
 
-	const handleSearch = async event => {
+	const handleSearch = async (event) => {
 		event.preventDefault();
 
 		const start = await Directions.getCoords(inputData.startPoint);
 		const end = await Directions.getCoords(inputData.endPoint);
-		const route = await Directions.getRoute(start, end);
+		const newRoute = await Directions.getRoute(start, end);
+		setRoute(newRoute);
 
 		//--------------------------
 		// NOTE debug
 		console.log(inputData);
 		console.log('start', start);
 		console.log('end', end);
-		console.log('route', route);
+		console.log('route', newRoute, route);
+		console.log('RouteContext::', RouteContext);
 		//--------------------------
 
 		// creating if statement so that searches are only saved if the user is logged in:
@@ -66,38 +69,38 @@ const Input = props => {
 
 	return (
 		<div {...props}>
-			<div className='input-group mb-3'>
-				<div className='input-group-prepend'>
-					<span className='input-group-text' id='basic-addon1'>
+			<div className="input-group mb-3">
+				<div className="input-group-prepend">
+					<span className="input-group-text" id="basic-addon1">
 						Start
 					</span>
 				</div>
 				<input
-					type='text'
-					className='form-control col-4'
-					aria-label='Start'
-					aria-describedby='basic-addon1'
-					name='startPoint'
-					defaultValue='San Francisco,CA'
+					type="text"
+					className="form-control col-4"
+					aria-label="Start"
+					aria-describedby="basic-addon1"
+					name="startPoint"
+					defaultValue="San Francisco,CA"
 					onChange={handleInputChange}
 				></input>
-				<div className='input-group-prepend'>
-					<span className='input-group-text' id='basic-addon1'>
+				<div className="input-group-prepend">
+					<span className="input-group-text" id="basic-addon1">
 						End
 					</span>
 				</div>
 				<input
-					type='text'
-					className='form-control col-4'
-					aria-label='End'
-					aria-describedby='basic-addon1'
-					name='endPoint'
-					defaultValue='Santa Cruz,CA'
+					type="text"
+					className="form-control col-4"
+					aria-label="End"
+					aria-describedby="basic-addon1"
+					name="endPoint"
+					defaultValue="Santa Cruz,CA"
 					onChange={handleInputChange}
 				></input>
 				<button
-					type='button'
-					className='btn btn-secondary text-body'
+					type="button"
+					className="btn btn-secondary text-body"
 					onClick={handleSearch}
 				>
 					Search
@@ -107,4 +110,5 @@ const Input = props => {
 	);
 };
 
-export default Input;
+export { Input };
+export { RouteContext };
