@@ -29,6 +29,7 @@
     "mapbox-gl": "^1.8.1",
     "mongoose": "^5.3.16",
     "react": "^16.13.1",
+    "react-animations": "^1.0.0",
     "react-map-gl": "^5.2.3",
     "react-map-gl-geocoder": "^2.0.11",
     "reactstrap": "^8.4.1"
