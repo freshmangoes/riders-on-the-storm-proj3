@@ -38,7 +38,7 @@ class Mapv2 extends Component {
 	handleViewportChange = (viewport) => {
 		// NOTE debug
 		// Placed console.log here because it makes it easy to call by moving the map viewport.
-		console.log('RouteContext', RouteContext);
+		// console.log('RouteContext', RouteContext);
 		const { width, height, ...etc } = viewport;
 		this.setState({
 			viewport: etc
@@ -74,9 +74,11 @@ class Mapv2 extends Component {
 			getRadius: 100,
 			getLineWidth: 1,
 			getElevation: 30,
-			// onHover: ({object, x, y}) => {
-			// 	const tooltip = object.properties.name || object.properties.station;
-			// }
+			onClick: (info, event) => {
+				// info houses the coordinates
+				console.log('info', info);
+				console.log('event', event);
+			}
 		});
 
 		return (
@@ -96,9 +98,10 @@ class Mapv2 extends Component {
 						onViewportChange={this.handleGeocoderViewportChange}
 					/>
 					<DeckGL
-						mapRef={this.mapRef} 
+						mapRef={this.mapRef}
 						layers={layer}
 						viewState={viewport}
+						onClick={this._onClick}
 					/>
 					<GeolocateControl
 						style={geolocateStyle}
