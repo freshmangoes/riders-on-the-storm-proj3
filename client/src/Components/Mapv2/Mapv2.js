@@ -110,8 +110,8 @@ class Mapv2 extends Component {
 			<div className="container-fluid">
 				<ReactMapGL
 					ref={this.mapRef}
-					width="100vw"
-					height="100vh"
+					width="78.5vw"
+					height="80vh"
 					{...viewport}
 					onViewportChange={(viewport) => this.handleViewportChange(viewport)}
 					mapStyle="mapbox://styles/mapbox/streets-v11"

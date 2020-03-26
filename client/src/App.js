@@ -1,12 +1,13 @@
 
 import React, { useState } from "react";
-import Navbar from "./Components/Navbar"
-import { Input } from "./Components/Input"
-import Mapv2 from './Components/Mapv2'
+import Navbar from "./Components/Navbar";
+import { Input } from "./Components/Input";
+import Mapv2 from './Components/Mapv2';
 import { CurrentUserIdContext } from './Context/CurrentUserIdContext';
 import { UserLoggedInContext } from './Context/UserLoggedInContext';
 import { RouteContext } from './Context/RouteContext';
-
+import SideCard from './Components/SideCard';
+import { Row, Col} from 'reactstrap'
 function App() {
   const [userLoggedIn, setUserLoggedIn] = useState(false);
   const [currentUserId, setCurrentUserId] = useState('');
@@ -18,9 +19,19 @@ function App() {
         <RouteContext.Provider value={{ route, setRoute }}>
           <div>
             <Navbar />
-            <Input />
+              <Row>
+                <Input />
+              </Row>
+              <Row className="no-gutters">
+                <Col>
+                  <Mapv2 />
+                </Col>
+                <Col>
+                  <SideCard />
+                  
+                </Col>
+              </Row>
 
-            <Mapv2 />
           </div>
         </RouteContext.Provider>
       </CurrentUserIdContext.Provider >
