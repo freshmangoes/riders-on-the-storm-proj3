@@ -40,21 +40,11 @@ class Mapv2 extends Component {
 	};
 
 	componentDidMount() {
-		// this.state.route = this.context.route
 		this.setState({
 			...this.state,
 			route: this.context.route
 		})
-		console.log('mount', this.context) //testing
-		// if (this.state.route.coordinates) {
-		// 	const first = this.state.route.coordinates[0]
-		// 	const last = this.state.route.coordinates[this.state.route.coordinates.length - 1]
-		// 	console.log(first, last, 'compdidupdate')
-		// 	const midX = first[0] + (last[0] - first[0]) * 0.50;
-		// 	const midY = first[1] + (last[1] - first[1]) * 0.50;
-		// 	console.log('mids', midX, midY)
-		// 	this.flyToRoute(midX, midY)
-		// }
+		console.log('mount', this.context)
 	}
 
 	componentDidUpdate() {
@@ -67,18 +57,20 @@ class Mapv2 extends Component {
 			const midX = first[0] + (last[0] - first[0]) * 0.50;
 			const midY = first[1] + (last[1] - first[1]) * 0.50;
 			console.log('mids', midY, midX)
+
+			// THIS NEEDS TO BE DEBUGGED
 			this.state.route = this.context.route
-
-
+			// the above throws a warning but the below ends up triggering set state in a loop
 			// this.setState({
 			// 	...this.state,
 			// 	route: this.context.route
 			// })
+
+
 			this.flyToRoute(midX, midY, first, last)
 		}
 
 
-		// this.handleGeocoderViewportChange();
 	}
 
 	// map reference for other map features
@@ -107,11 +99,12 @@ class Mapv2 extends Component {
 		});
 	};
 	// method for use when clicking route for weather:
-
 	showWeather = (latLongObj) => {
 		return API.getWeather(latLongObj)
 	}
 
+	// This method should be called when moving to a new route. 
+	// long and lat should be the mid point between the start and end coordinates, first is the start coordinates, and last is the end coordinates
 	flyToRoute = (long, lat, first, last) => {
 		const { longitude, latitude, zoom } = new WebMercatorViewport({
 			width: 800,
@@ -132,7 +125,6 @@ class Mapv2 extends Component {
 			// transitionEasing: d3.easeCubic
 		};
 		console.log(viewport, 'route viewport')
-		// this.state.viewport = viewport
 
 		this.setState({
 			...this.state,
@@ -140,31 +132,7 @@ class Mapv2 extends Component {
 		});
 	};
 
-	_goToSF = () => {
-		const { longitude, latitude, zoom } = new WebMercatorViewport({
-			width: 800,
-			height: 600,
-			longitude: -122.45,
-			latitude: 37.78,
-			zoom: 12,
-			pitch: 60,
-			bearing: 30
-		})
-			.fitBounds([[-122.4, 37.7], [-122.5, 37.8]], {
-				padding: 20,
-				offset: [0, -100]
-			});
-		const viewport = {
-			...this.state.viewport,
-			longitude,
-			latitude,
-			zoom,
-			transitionDuration: 5000,
-			transitionInterpolator: new FlyToInterpolator(),
-			// transitionEasing: d3.easeCubic
-		}
-		this.setState({ viewport });
-	};
+
 
 	render() {
 		const { viewport } = this.state;
@@ -208,8 +176,7 @@ class Mapv2 extends Component {
 
 		return (
 			<div className="container-fluid">
-				<button onClick={() => this.flyToRoute(-74.1, 40.7)}>New York City</button>
-				<button onClick={this._goToSF}>GO TO SF</button>
+
 				<ReactMapGL
 					ref={this.mapRef}
 					width="100vw"
