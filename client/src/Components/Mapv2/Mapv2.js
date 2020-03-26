@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactMapGL, { GeolocateControl } from 'react-map-gl';
+import ReactMapGL, { GeolocateControl, FlyToInterpolator } from 'react-map-gl';
 import DeckGL, { GeoJsonLayer } from 'deck.gl';
 import Geocoder from 'react-map-gl-geocoder';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -46,15 +46,38 @@ class Mapv2 extends Component {
 			route: this.context.route
 		})
 		console.log('mount', this.context) //testing
+		// if (this.state.route.coordinates) {
+		// 	const first = this.state.route.coordinates[0]
+		// 	const last = this.state.route.coordinates[this.state.route.coordinates.length - 1]
+		// 	console.log(first, last, 'compdidupdate')
+		// 	const midX = first[0] + (last[0] - first[0]) * 0.50;
+		// 	const midY = first[1] + (last[1] - first[1]) * 0.50;
+		// 	console.log('mids', midX, midY)
+		// 	this.flyToRoute(midX, midY)
+		// }
 	}
 
 	componentDidUpdate() {
 		console.log('update', this.context)
-		this.state.route = this.context.route
-		// this.setState({
-		// 	...this.state,
-		// 	route: this.context.route
-		// })
+		if (this.context.route && this.context.route.coordinates && this.state.route !== this.context.route) {
+
+			const first = this.context.route.coordinates[0]
+			const last = this.context.route.coordinates[this.context.route.coordinates.length - 1]
+			console.log(first, last, 'compdidupdate')
+			const midX = first[0] + (last[0] - first[0]) * 0.50;
+			const midY = first[1] + (last[1] - first[1]) * 0.50;
+			console.log('mids', midY, midX)
+			this.state.route = this.context.route
+
+
+			// this.setState({
+			// 	...this.state,
+			// 	route: this.context.route
+			// })
+			this.flyToRoute(midX, midY)
+		}
+
+
 		// this.handleGeocoderViewportChange();
 	}
 
@@ -67,6 +90,8 @@ class Mapv2 extends Component {
 		// Placed console.log here because it makes it easy to call by moving the map viewport.
 		console.log('RouteContext', RouteContext);
 		const { width, height, ...etc } = viewport;
+
+		// this.state.viewport = etc;
 		this.setState({
 			...this.state,
 			viewport: etc
@@ -86,6 +111,24 @@ class Mapv2 extends Component {
 	showWeather = (latLongObj) => {
 		return API.getWeather(latLongObj)
 	}
+
+	flyToRoute = (long, lat) => {
+		const viewport = {
+			...this.state.viewport,
+			longitude: long,
+			latitude: lat,
+			zoom: 8,
+			transitionDuration: 5000,
+			transitionInterpolator: new FlyToInterpolator(),
+			// transitionEasing: d3.easeCubic
+		};
+		console.log(viewport)
+		// this.state.viewport = viewport
+		this.setState({
+			...this.state,
+			viewport
+		});
+	};
 
 	render() {
 		const { viewport } = this.state;
@@ -126,8 +169,10 @@ class Mapv2 extends Component {
 			}
 		});
 
+
 		return (
 			<div className="container-fluid">
+				<button onClick={() => this.flyToRoute(-74.1, 40.7)}>New York City</button>
 				<ReactMapGL
 					ref={this.mapRef}
 					width="100vw"
