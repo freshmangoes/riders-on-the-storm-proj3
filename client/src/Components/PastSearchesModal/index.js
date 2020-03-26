@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, Card, CardBody } from 'reactstrap';
 import API from '../../utils/API';
 import { SearchInputContext } from '../../Context/SearchInputContext';

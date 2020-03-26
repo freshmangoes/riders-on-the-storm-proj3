@@ -6,6 +6,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import API from '../../utils/API';
 import { RouteContext } from '../../Context/RouteContext';
+import { Button } from 'reactstrap'
 
 /*
 TODO :: in no particular order, but definitely matters which one comes first
@@ -33,19 +34,27 @@ class Mapv2 extends Component {
 			longitude: -122.273,
 			zoom: 12
 		},
-		route: {}
+		route: this.context.route,
+		itemArray: []
 
 	};
 
 	componentDidMount() {
-		this.state.route = this.context.route
-
+		// this.state.route = this.context.route
+		this.setState({
+			...this.state,
+			route: this.context.route
+		})
 		console.log('mount', this.context) //testing
 	}
 
 	componentDidUpdate() {
 		console.log('update', this.context)
 		this.state.route = this.context.route
+		// this.setState({
+		// 	...this.state,
+		// 	route: this.context.route
+		// })
 		// this.handleGeocoderViewportChange();
 	}
 
@@ -59,6 +68,7 @@ class Mapv2 extends Component {
 		console.log('RouteContext', RouteContext);
 		const { width, height, ...etc } = viewport;
 		this.setState({
+			...this.state,
 			viewport: etc
 		});
 	};
@@ -74,8 +84,7 @@ class Mapv2 extends Component {
 	// method for use when clicking route for weather:
 
 	showWeather = (latLongObj) => {
-		API.getWeather(latLongObj).then(data =>
-			console.log(data))
+		return API.getWeather(latLongObj)
 	}
 
 	render() {
@@ -102,7 +111,18 @@ class Mapv2 extends Component {
 				// info houses the coordinates
 				console.log('info', info);
 				console.log('event', event);
-				this.showWeather({ lat: info.lngLat[1], lon: info.lngLat[0] });
+				this.showWeather({ lat: info.lngLat[1], lon: info.lngLat[0] }).then(data => {
+					const newArr = this.state.itemArray;
+					newArr.push({ style: { left: info.x, top: info.y, display: "block", position: "absolute", background: "white", opacity: 0.8 }, value: JSON.stringify(data) }
+
+
+					)
+					this.setState({
+						...this.state,
+						itemArray: newArr
+					})
+				});
+
 			}
 		});
 
@@ -133,7 +153,30 @@ class Mapv2 extends Component {
 						trackUserLocation={true}
 					/>
 				</ReactMapGL>
+				{
+					this
+						.state
+						.itemArray
+						.map((item, index) => {
+							return (
+								<div style={item.style} id={"tooltip-" + index}>
+									{item.value} <Button onClick={() => {
+										document
+											.getElementById("tooltip-" + index)
+											.parentNode
+											.removeChild(
+												document
+													.getElementById("tooltip-" + index)
+											)
+									}}>X
+								</Button>
+								</div>
+							)
+						}
+						)
+				}
 			</div>
+
 		);
 	}
 }
