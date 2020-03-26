@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactMapGL, { GeolocateControl, FlyToInterpolator } from 'react-map-gl';
+import ReactMapGL, { GeolocateControl, FlyToInterpolator, WebMercatorViewport } from 'react-map-gl';
 import DeckGL, { GeoJsonLayer } from 'deck.gl';
 import Geocoder from 'react-map-gl-geocoder';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -74,7 +74,7 @@ class Mapv2 extends Component {
 			// 	...this.state,
 			// 	route: this.context.route
 			// })
-			this.flyToRoute(midX, midY)
+			this.flyToRoute(midX, midY, first, last)
 		}
 
 
@@ -112,22 +112,58 @@ class Mapv2 extends Component {
 		return API.getWeather(latLongObj)
 	}
 
-	flyToRoute = (long, lat) => {
+	flyToRoute = (long, lat, first, last) => {
+		const { longitude, latitude, zoom } = new WebMercatorViewport({
+			width: 800,
+			height: 600,
+			longitude: long,
+			latitude: lat
+		}).fitBounds([first, last], {
+			padding: 20,
+			offset: [0, -100]
+		});
 		const viewport = {
 			...this.state.viewport,
-			longitude: long,
-			latitude: lat,
-			zoom: 8,
+			longitude,
+			latitude,
+			zoom,
 			transitionDuration: 5000,
 			transitionInterpolator: new FlyToInterpolator(),
 			// transitionEasing: d3.easeCubic
 		};
-		console.log(viewport)
+		console.log(viewport, 'route viewport')
 		// this.state.viewport = viewport
+
 		this.setState({
 			...this.state,
 			viewport
 		});
+	};
+
+	_goToSF = () => {
+		const { longitude, latitude, zoom } = new WebMercatorViewport({
+			width: 800,
+			height: 600,
+			longitude: -122.45,
+			latitude: 37.78,
+			zoom: 12,
+			pitch: 60,
+			bearing: 30
+		})
+			.fitBounds([[-122.4, 37.7], [-122.5, 37.8]], {
+				padding: 20,
+				offset: [0, -100]
+			});
+		const viewport = {
+			...this.state.viewport,
+			longitude,
+			latitude,
+			zoom,
+			transitionDuration: 5000,
+			transitionInterpolator: new FlyToInterpolator(),
+			// transitionEasing: d3.easeCubic
+		}
+		this.setState({ viewport });
 	};
 
 	render() {
@@ -173,6 +209,7 @@ class Mapv2 extends Component {
 		return (
 			<div className="container-fluid">
 				<button onClick={() => this.flyToRoute(-74.1, 40.7)}>New York City</button>
+				<button onClick={this._goToSF}>GO TO SF</button>
 				<ReactMapGL
 					ref={this.mapRef}
 					width="100vw"
