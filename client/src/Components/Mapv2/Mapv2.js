@@ -141,7 +141,6 @@ class Mapv2 extends Component {
 						itemArray: newArr
 					})
 				});
-
 			}
 		});
 
