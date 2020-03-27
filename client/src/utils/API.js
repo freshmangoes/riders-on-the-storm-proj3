@@ -17,7 +17,7 @@ export default {
 
 	getWeather: async (search) => {
 		const { lat, lon } = search;
-		const weatherUrl = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_OPEN_WEATHER_API_KEY}`;
+		const weatherUrl = `http://api.openweathermap.org/data/2.5/weather?units=imperial&lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_OPEN_WEATHER_API_KEY}`;
 		return axios.get(weatherUrl);
 	}
 };
