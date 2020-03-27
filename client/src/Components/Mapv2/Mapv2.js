@@ -186,11 +186,11 @@ class Mapv2 extends Component {
 					mapStyle="mapbox://styles/mapbox/streets-v11"
 					mapboxApiAccessToken={TOKEN}
 				>
-					<Geocoder
+					{/* <Geocoder
 						mapRef={this.mapRef}
 						mapboxApiAccessToken={TOKEN}
 						onViewportChange={this.handleGeocoderViewportChange}
-					/>
+					/> */}
 					<DeckGL
 						mapRef={this.mapRef}
 						layers={layer}
