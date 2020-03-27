@@ -16,7 +16,7 @@ import { SearchInputContext } from './Context/SearchInputContext';
 function App() {
   const [userLoggedIn, setUserLoggedIn] = useState(false);
   const [currentUserId, setCurrentUserId] = useState('');
-  const [route, setRoute] = useState({});
+  const [route, setRoute] = useState({ coordinates: [] });
   const [searchInput, setSearchInput] = useState({
     startPoint: 'San Francisco, CA',
     endPoint: 'Santa Cruz, CA'
