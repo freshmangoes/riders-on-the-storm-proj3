@@ -5,7 +5,7 @@ import { PastSearchesModal } from "../PastSearchesModal/index";
 import { CurrentUserIdContext } from '../../Context/CurrentUserIdContext';
 import { UserLoggedInContext } from '../../Context/UserLoggedInContext';
 import { Button } from 'reactstrap';
-import Logo from './Logo.png';
+import MotoWeather from './MotoWeather.png';
 
 function Nav() {
   const { currentUserId, setCurrentUserId } = useContext(CurrentUserIdContext);
@@ -22,7 +22,7 @@ function Nav() {
     <nav className="navbar  navbar-dark  bg-dark">
       
       <a className="navbar-brand" href="/">
-      <img src={Logo} alt="MotoWeather"></img>
+      <img src={MotoWeather} alt="MotoWeather"></img>
       </a>
 
       {

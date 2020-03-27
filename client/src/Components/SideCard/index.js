@@ -12,7 +12,7 @@ function SideCard() {
             Step 1:
         </CardHeader>
         <CardTitle className="text-white">
-            Type in start and end destinations
+            Type in Start and End Destinations
         </CardTitle>
     </CardBody>
 </Card>
@@ -22,7 +22,7 @@ function SideCard() {
          Step 2:
      </CardHeader>
      <CardTitle className="text-white">
-         Click on the highlighted route to show weather data on route
+         Click On The Highlighted Route To Show Weather Data On Route
      </CardTitle>
  </CardBody>
 </Card>
@@ -32,7 +32,7 @@ function SideCard() {
          Optional:
      </CardHeader>
      <CardTitle className="text-white">
-        Once you're logged in, click on "Search History" for old routes
+        Once You're Logged In, Click On "Search History" For Old Routes
      </CardTitle>
  </CardBody>
 </Card>
