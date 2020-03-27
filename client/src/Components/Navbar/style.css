@@ -1,3 +1,10 @@
 .navbar {
     font-family: 'Emblema One', cursive;
+    align-items:bottom !important;
+    height:140px;
+}
+
+img {
+    display:block;
+    height:150px;
 }

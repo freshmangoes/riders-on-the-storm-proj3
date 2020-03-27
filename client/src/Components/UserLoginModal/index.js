@@ -16,7 +16,7 @@ export const UserLoginModal = (props) => {
         <div>
             <Button color="dark" onClick={toggle}>{buttonLabel}</Button>
             <Modal isOpen={modal} toggle={toggle} className={className}>
-                <ModalHeader toggle={toggle}>Login as an existing user below, or sign up for a new user account!</ModalHeader>
+                <ModalHeader className="bg-dark text-white" toggle={toggle}>Login as an existing user below, or sign up for a new user account!</ModalHeader>
                 <ModalBody>
                     <UserLogin toggle={toggle} />
                 </ModalBody>
