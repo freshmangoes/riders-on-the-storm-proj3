@@ -36,43 +36,41 @@ const Input = props => {
 		const end = await Directions.getCoords(inputData.endPoint);
 		console.log(start, end, start && end, 'lalala');
 		// i don't think this is working properly as validation...
-		if (start && end) {
-			const newRoute = await Directions.getRoute(start, end);
-			setRoute(newRoute);
 
-			//--------------------------
-			// NOTE debug
-			// console.log(inputData);
-			// console.log('start', start);
-			// console.log('end', end);
-			// console.log('route', newRoute, route);
-			// console.log('RouteContext::', RouteContext);
-			//--------------------------
+		const newRoute = await Directions.getRoute(start, end);
+		setRoute(newRoute);
 
-			// creating if statement so that searches are only saved if the user is logged in:
-			if (userLoggedIn) {
-				const apiInputData = {
-					start: inputData.startPoint,
-					end: inputData.endPoint,
-					userId: currentUserId
+		//--------------------------
+		// NOTE debug
+		// console.log(inputData);
+		// console.log('start', start);
+		// console.log('end', end);
+		// console.log('route', newRoute, route);
+		// console.log('RouteContext::', RouteContext);
+		//--------------------------
 
-				}
-				API.userInput(apiInputData)
-					.then(data => {
-						if (data.data.message === 'Success') {
-							alert(`Added to search history`);
-						} else if (data.data.message === 'Search exists!') {
-							console.log(data.data.message);
-						} else {
-							alert(data.data.message);
-							console.log(data.data.message);
-						}
+		// creating if statement so that searches are only saved if the user is logged in:
+		if (userLoggedIn) {
+			const apiInputData = {
+				start: inputData.startPoint,
+				end: inputData.endPoint,
+				userId: currentUserId
 
-					})
-					.catch(err => console.log(err));
-			} else {
-				alert('The start or end search terms are invalid, please try again.')
 			}
+			API.userInput(apiInputData)
+				.then(data => {
+					if (data.data.message === 'Success') {
+						alert(`Added to search history`);
+					} else if (data.data.message === 'Search exists!') {
+						console.log(data.data.message);
+					} else {
+						alert(data.data.message);
+						console.log(data.data.message);
+					}
+
+				})
+				.catch(err => console.log(err));
+
 		}
 
 
