@@ -1,3 +1,18 @@
-.input-group { 
-    margin:10px;
+#inputForm{
+    padding-left:30px;
+    padding-top:30px;
+   
+}
+
+.form-group{
+    padding-right:15px;
+}
+
+label{
+    padding-right:10px;
+    font-size: 20px;
+}
+
+#endInput{
+    padding-left:10px;
 }

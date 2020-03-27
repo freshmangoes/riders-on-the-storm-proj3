@@ -1,8 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, Card, CardBody } from 'reactstrap';
 import API from '../../utils/API';
 
+import "./style.css"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMapPin } from '@fortawesome/free-solid-svg-icons'
+
+import { SearchInputContext } from '../../Context/SearchInputContext';
+
+
 export const PastSearchesModal = (props) => {
+    const { setSearchInput } = useContext(SearchInputContext)
+
     const {
         buttonLabel,
         className,
@@ -33,15 +42,23 @@ export const PastSearchesModal = (props) => {
         <span>
             <Button color="dark" onClick={toggle}>{buttonLabel}</Button>
             <Modal isOpen={modal} toggle={toggle} className={className}>
-                <ModalHeader toggle={toggle}>Past Searches: </ModalHeader>
+                <ModalHeader className="bg-dark text-white font-weight-bold" toggle={toggle}>Search History: </ModalHeader>
                 <ModalBody>
-                    Past Searches here.
+                    
                     {searchResults.map((res, index) => {
-                    return <Card key={index} onClick={() => { console.log('you clicked ', index, res.start, res.end); toggle() }
+                    return <Card key={index} onClick={() => {
+                        console.log('you clicked ', index, res.start, res.end); setSearchInput({
+                            startPoint: res.start, endPoint: res.end
+                        }); toggle()
+                    }
                     }>
                         <CardBody>
-                            <p>Start: {res.start}</p>
-                            <p>End: {res.end}</p>
+                            <div className="topLine">
+                            <p className="start"><FontAwesomeIcon className="fa fa-lg" id="startIcon" icon={faMapPin} />Start: {res.start}</p>
+                            </div>
+                            <div className="bottomLine">
+                            <p className="end"><FontAwesomeIcon className="fa fa-lg" id="endIcon" icon={faMapPin}/>End: {res.end}</p>
+                            </div>
                         </CardBody>
 
                     </Card>
