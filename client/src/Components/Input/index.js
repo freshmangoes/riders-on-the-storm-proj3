@@ -78,44 +78,88 @@ const Input = props => {
 	};
 
 	return (
-		<div {...props}>
-			<div className="input-group mb-3">
-				<div className="input-group-prepend">
-					<span className="input-group-text" id="basic-addon1">
+		// <div {...props}>
+		// 	<div className="input-group mb-3">
+		// 		<div className="input-group-prepend">
+		// 			<span className="input-group-text" id="basic-addon1">
+		// 				Start
+		// 			</span>
+		// 		</div>
+		// 		<input
+		// 			type="text"
+		// 			className="form-control col-4"
+		// 			aria-label="Start"
+		// 			aria-describedby="basic-addon1"
+		// 			name="startPoint"
+		// 			defaultValue="San Francisco,CA"
+		// 			onChange={handleInputChange}
+		// 		></input>
+		// 		<div className="input-group-prepend">
+		// 			<span className="input-group-text" id="basic-addon1">
+		// 				End
+		// 			</span>
+		// 		</div>
+		// 		<input
+		// 			type="text"
+		// 			className="form-control col-4"
+		// 			aria-label="End"
+		// 			aria-describedby="basic-addon1"
+		// 			name="endPoint"
+		// 			defaultValue="Santa Cruz,CA"
+		// 			onChange={handleInputChange}
+		// 		></input>
+		// 		<button
+		// 			type="button"
+		// 			className="btn btn-secondary text-body"
+		// 			onClick={handleSearch}
+		// 		>
+		// 			Search
+		// 		</button>
+		// 	</div>
+		// </div>
+		<div {...props} id="inputForm">
+			<form className="form-inline mb-4">
+				<div className='form-group'>
+					<label>
 						Start
-					</span>
-				</div>
+					</label>
 				<input
+
 					type="text"
 					className="form-control col-4"
 					aria-label="Start"
 					aria-describedby="basic-addon1"
 					name="startPoint"
 					value={inputData.startPoint}
+
 					onChange={handleInputChange}
 				></input>
-				<div className="input-group-prepend">
-					<span className="input-group-text" id="basic-addon1">
-						End
-					</span>
 				</div>
+				<div className='form-group' id="endInput">
+					<label>
+						End
+					</label>
 				<input
+
 					type="text"
 					className="form-control col-4"
 					aria-label="End"
 					aria-describedby="basic-addon1"
 					name="endPoint"
 					value={inputData.endPoint}
+
 					onChange={handleInputChange}
 				></input>
+				</div>
 				<button
-					type="button"
-					className="btn btn-secondary text-body"
+					type='button'
+					className='btn btn-secondary text-body'
 					onClick={handleSearch}
 				>
 					Search
-				</button>
-			</div>
+				</button>	
+					
+				</form>
 		</div>
 	);
 };
