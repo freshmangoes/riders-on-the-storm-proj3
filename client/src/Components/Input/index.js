@@ -34,17 +34,19 @@ const Input = props => {
 
 		const start = await Directions.getCoords(inputData.startPoint);
 		const end = await Directions.getCoords(inputData.endPoint);
+		console.log(start, end, start && end, 'lalala');
+		// i don't think this is working properly as validation...
 		if (start && end) {
 			const newRoute = await Directions.getRoute(start, end);
 			setRoute(newRoute);
 
 			//--------------------------
 			// NOTE debug
-			console.log(inputData);
-			console.log('start', start);
-			console.log('end', end);
-			console.log('route', newRoute, route);
-			console.log('RouteContext::', RouteContext);
+			// console.log(inputData);
+			// console.log('start', start);
+			// console.log('end', end);
+			// console.log('route', newRoute, route);
+			// console.log('RouteContext::', RouteContext);
 			//--------------------------
 
 			// creating if statement so that searches are only saved if the user is logged in:

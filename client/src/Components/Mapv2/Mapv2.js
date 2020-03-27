@@ -44,19 +44,19 @@ class Mapv2 extends Component {
 			...this.state,
 			route: this.context.route
 		})
-		console.log('mount', this.context)
+		// console.log('mount', this.context)
 	}
 
 	componentDidUpdate() {
-		console.log('update', this.context)
+		// console.log('update', this.context)
 		if (this.context.route && this.context.route.coordinates && this.state.route !== this.context.route) {
 
 			const first = this.context.route.coordinates[0]
 			const last = this.context.route.coordinates[this.context.route.coordinates.length - 1]
-			console.log(first, last, 'compdidupdate')
+			// console.log(first, last, 'compdidupdate')
 			const midX = first[0] + (last[0] - first[0]) * 0.50;
 			const midY = first[1] + (last[1] - first[1]) * 0.50;
-			console.log('mids', midY, midX)
+			// console.log('mids', midY, midX)
 
 			// THIS NEEDS TO BE DEBUGGED
 			this.state.route = this.context.route
@@ -80,7 +80,7 @@ class Mapv2 extends Component {
 	handleViewportChange = (viewport) => {
 		// NOTE debug
 		// Placed console.log here because it makes it easy to call by moving the map viewport.
-		console.log('RouteContext', RouteContext);
+		// console.log('RouteContext', RouteContext);
 		const { width, height, ...etc } = viewport;
 
 		// this.state.viewport = etc;
@@ -124,7 +124,7 @@ class Mapv2 extends Component {
 			transitionInterpolator: new FlyToInterpolator(),
 			// transitionEasing: d3.easeCubic
 		};
-		console.log(viewport, 'route viewport')
+		// console.log(viewport, 'route viewport')
 
 		this.setState({
 			...this.state,
@@ -156,8 +156,8 @@ class Mapv2 extends Component {
 			getElevation: 30,
 			onClick: (info, event) => {
 				// info houses the coordinates
-				console.log('info', info);
-				console.log('event', event);
+				// console.log('info', info);
+				// console.log('event', event);
 				this.showWeather({ lat: info.lngLat[1], lon: info.lngLat[0] }).then(data => {
 					const newArr = this.state.itemArray;
 					newArr.push({ style: { left: info.x, top: info.y, display: "block", position: "absolute", background: "white", opacity: 0.8 }, value: JSON.stringify(data) }
@@ -175,12 +175,12 @@ class Mapv2 extends Component {
 
 
 		return (
-			<div className="container-fluid">
+			<div className="container-fluid p-0">
 
 				<ReactMapGL
 					ref={this.mapRef}
-					width="100vw"
-					height="100vh"
+					width="99vw"
+					height="99vh"
 					{...viewport}
 					onViewportChange={(viewport) => this.handleViewportChange(viewport)}
 					mapStyle="mapbox://styles/mapbox/streets-v11"
