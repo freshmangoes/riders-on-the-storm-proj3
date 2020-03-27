@@ -1,30 +1,9 @@
 const db = require("../models");
 
-// Defining methods for the booksController
 module.exports = {
-  // findAll: function(req, res) {
-  //   db.Book
-  //     .find(req.query)
-  //     .sort({ date: -1 })
-  //     .then(dbModel => res.json(dbModel))
-  //     .catch(err => res.status(422).json(err));
-  // },
-  // findById: function(req, res) {
-  //   db.Book
-  //     .findById(req.params.id)
-  //     .then(dbModel => res.json(dbModel))
-  //     .catch(err => res.status(422).json(err));
-  // },
-  // create: (req, res) => {
-  //   // console.log(req.body);
-  //   db.User
-  //     .create(req.body)
-  //     .then(dbModel => res.json(dbModel))
-  //     .catch(err => res.status(00).json(err));
-  // },
+
   create2: async (req, res) => {
     try {
-      // console.log(req.body.username, req.body.password)
       if (!req.body.username || !req.body.password) {
         res.status(200).json({ message: 'The username or password value is missing, please make sure to include both fields and try creating the account again.' })
       } else {
@@ -45,7 +24,6 @@ module.exports = {
   },
   login: async (req, res) => {
     try {
-      // console.log(req.body.username, req.body.password)
 
       const user = await db.User.findOne({ username: req.body.username })
       if (!user) {
@@ -63,17 +41,5 @@ module.exports = {
   }
 
 
-  // update: function(req, res) {
-  //   db.Book
-  //     .findOneAndUpdate({ _id: req.params.id }, req.body)
-  //     .then(dbModel => res.json(dbModel))
-  //     .catch(err => res.status(422).json(err));
-  // },
-  // remove: function(req, res) {
-  //   db.Book
-  //     .findById({ _id: req.params.id })
-  //     .then(dbModel => dbModel.remove())
-  //     .then(dbModel => res.json(dbModel))
-  //     .catch(err => res.status(422).json(err));
-  // }
+
 };
