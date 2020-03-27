@@ -1,33 +1,31 @@
-.start{
-    font-size:20px;
-    font-weight:bold;
+.start {
+	font-size: 20px;
+	font-weight: bold;
 }
 
-.end{
-    font-size:20px;
-    font-weight:bold;
+.end {
+	font-size: 20px;
+	font-weight: bold;
 }
 
-.stopLine{
-    display:inline-block;
+.stopLine {
+	display: inline-block;
 }
 
-#startIcon{
-    color:#006600;
-    margin-right:10px;
-   
+#startIcon {
+	color: #006600;
+	margin-right: 10px;
 }
 
-#endIcon{
-    color:#990000;
-    margin-right:10px;
-    
+#endIcon {
+	color: #990000;
+	margin-right: 10px;
 }
 
-.card{
-    margin-bottom: 10px;
+.card {
+	margin-bottom: 10px;
 }
 
-.modal-body{
-    background-color: rgb(199 199 204);
+.modal-body {
+	background-color: rgb(199 199 204);
 }
