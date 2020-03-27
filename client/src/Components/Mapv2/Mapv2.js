@@ -7,6 +7,7 @@ import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import API from '../../utils/API';
 import { RouteContext } from '../../Context/RouteContext';
 import { Button } from 'reactstrap'
+import WeatherCard from '../WeatherCard/index.js'
 
 /*
 TODO :: in no particular order, but definitely matters which one comes first
@@ -160,7 +161,8 @@ class Mapv2 extends Component {
 				// console.log('event', event);
 				this.showWeather({ lat: info.lngLat[1], lon: info.lngLat[0] }).then(data => {
 					const newArr = this.state.itemArray;
-					newArr.push({ style: { left: info.x, top: info.y, display: "block", position: "absolute", background: "white", opacity: 0.8 }, value: JSON.stringify(data) }
+					console.log(data, 'data')
+					newArr.push({ style: { left: info.x, top: info.y, display: "block", position: "absolute", background: "white", opacity: 0.9 }, value: <WeatherCard weatherObj={data.data} /> }
 
 
 					)
@@ -209,7 +211,7 @@ class Mapv2 extends Component {
 						.map((item, index) => {
 							return (
 								<div style={item.style} id={"tooltip-" + index}>
-									{item.value} <Button onClick={() => {
+									<Button onClick={() => {
 										document
 											.getElementById("tooltip-" + index)
 											.parentNode
@@ -219,6 +221,7 @@ class Mapv2 extends Component {
 											)
 									}}>X
 								</Button>
+									{item.value}
 								</div>
 							)
 						}

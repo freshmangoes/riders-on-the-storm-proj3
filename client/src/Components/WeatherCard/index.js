@@ -45,10 +45,11 @@ const WeatherCard = (props) => {
     // This should show human readable data from the json above
     return (
         <div>
-<h1>Weather Overview: {weatherObj.weather.main}</h1>
-<p>Weather Description: {weatherObj.weather.description}</p>
-<p> Temperature: {weatherObj.main.temp}</p>
-<p> Wind: {weatherObj.wind.speed}</p>
+            <h3>{weatherObj.name}</h3>
+            <p>Weather Overview: {weatherObj.weather[0].main}</p>
+            <p>Weather Description: {weatherObj.weather[0].description}</p>
+            <p> Temperature: {weatherObj.main.temp} F</p>
+            <p> Wind: {weatherObj.wind.speed} mph</p>
 
         </div>
     )

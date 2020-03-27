@@ -39,7 +39,7 @@ export default {
         // lat and lon search parameter
         const { lat, lon } = search;
         // get url for weather
-        const weatherUrl = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_OPEN_WEATHER_API_KEY}`;
+        const weatherUrl = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=${process.env.REACT_APP_OPEN_WEATHER_API_KEY}`;
         // initialize data to be returned at the end
         return axios.get(weatherUrl)
     }
