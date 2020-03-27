@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactMapGL, { GeolocateControl, FlyToInterpolator, WebMercatorViewport } from 'react-map-gl';
 import DeckGL, { GeoJsonLayer } from 'deck.gl';
-import Geocoder from 'react-map-gl-geocoder';
+// import Geocoder from 'react-map-gl-geocoder';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import API from '../../utils/API';
@@ -152,7 +152,7 @@ class Mapv2 extends Component {
 			getFillColor: [160, 160, 180, 200],
 			getLineColor: [255, 0, 0, 255],
 			getRadius: 100,
-			getLineWidth: 10,
+			getLineWidth: 20,
 			getElevation: 30,
 			onClick: (info, event) => {
 				// info houses the coordinates

@@ -13,7 +13,7 @@ const Input = props => {
 	// for user login context:
 	const { currentUserId } = useContext(CurrentUserIdContext);
 	const { userLoggedIn } = useContext(UserLoggedInContext);
-	const { route, setRoute } = useContext(RouteContext);
+	const { setRoute } = useContext(RouteContext);
 	const { searchInput, setSearchInput } = useContext(SearchInputContext);
 
 	const [inputData, setInputData] = useState(searchInput);
@@ -78,78 +78,40 @@ const Input = props => {
 	};
 
 	return (
-		// <div {...props}>
-		// 	<div className="input-group mb-3">
-		// 		<div className="input-group-prepend">
-		// 			<span className="input-group-text" id="basic-addon1">
-		// 				Start
-		// 			</span>
-		// 		</div>
-		// 		<input
-		// 			type="text"
-		// 			className="form-control col-4"
-		// 			aria-label="Start"
-		// 			aria-describedby="basic-addon1"
-		// 			name="startPoint"
-		// 			defaultValue="San Francisco,CA"
-		// 			onChange={handleInputChange}
-		// 		></input>
-		// 		<div className="input-group-prepend">
-		// 			<span className="input-group-text" id="basic-addon1">
-		// 				End
-		// 			</span>
-		// 		</div>
-		// 		<input
-		// 			type="text"
-		// 			className="form-control col-4"
-		// 			aria-label="End"
-		// 			aria-describedby="basic-addon1"
-		// 			name="endPoint"
-		// 			defaultValue="Santa Cruz,CA"
-		// 			onChange={handleInputChange}
-		// 		></input>
-		// 		<button
-		// 			type="button"
-		// 			className="btn btn-secondary text-body"
-		// 			onClick={handleSearch}
-		// 		>
-		// 			Search
-		// 		</button>
-		// 	</div>
-		// </div>
+
 		<div {...props} id="inputForm">
 			<form className="form-inline mb-4">
 				<div className='form-group'>
 					<label>
 						Start
 					</label>
-				<input
+					<input
 
-					type="text"
-					className="form-control col-4"
-					aria-label="Start"
-					aria-describedby="basic-addon1"
-					name="startPoint"
-					value={inputData.startPoint}
+						type="text"
+						className="form-control "
+						aria-label="Start"
+						aria-describedby="basic-addon1"
+						name="startPoint"
+						value={inputData.startPoint}
 
-					onChange={handleInputChange}
-				></input>
+						onChange={handleInputChange}
+					></input>
 				</div>
 				<div className='form-group' id="endInput">
 					<label>
 						End
 					</label>
-				<input
+					<input
 
-					type="text"
-					className="form-control col-4"
-					aria-label="End"
-					aria-describedby="basic-addon1"
-					name="endPoint"
-					value={inputData.endPoint}
+						type="text"
+						className="form-control "
+						aria-label="End"
+						aria-describedby="basic-addon1"
+						name="endPoint"
+						value={inputData.endPoint}
 
-					onChange={handleInputChange}
-				></input>
+						onChange={handleInputChange}
+					></input>
 				</div>
 				<button
 					type='button'
@@ -157,9 +119,9 @@ const Input = props => {
 					onClick={handleSearch}
 				>
 					Search
-				</button>	
-					
-				</form>
+				</button>
+
+			</form>
 		</div>
 	);
 };
