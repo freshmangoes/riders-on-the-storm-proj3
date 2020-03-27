@@ -10,6 +10,7 @@ import API from '../../utils/API';
 import { RouteContext } from '../../Context/RouteContext';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
+import WeatherCard from '../WeatherCard/index.js';
 
 const TOKEN = process.env.REACT_APP_MAP_TOKEN;
 const geolocateStyle = {
@@ -125,7 +126,6 @@ class Mapv2 extends Component {
 			getLineWidth: 20,
 			getElevation: 30,
 			onClick: (info, event) => {
-<<<<<<< HEAD
 				// info houses the coordinates
 				// console.log('info', info);
 				// console.log('event', event);
@@ -142,28 +142,6 @@ class Mapv2 extends Component {
 					})
 				});
 
-=======
-				this.showWeather({ lat: info.lngLat[1], lon: info.lngLat[0] }).then(
-					(data) => {
-						const newArr = this.state.itemArray;
-						newArr.push({
-							style: {
-								left: info.x,
-								top: info.y,
-								display: 'block',
-								position: 'absolute',
-								background: 'white',
-								opacity: 0.8
-							},
-							value: JSON.stringify(data)
-						});
-						this.setState({
-							...this.state,
-							itemArray: newArr
-						});
-					}
-				);
->>>>>>> master
 			}
 		});
 
@@ -190,50 +168,29 @@ class Mapv2 extends Component {
 						trackUserLocation={true}
 					/>
 				</ReactMapGL>
-<<<<<<< HEAD
-		{
-			this
-				.state
-				.itemArray
-				.map((item, index) => {
-					return (
-						<div style={item.style} id={"tooltip-" + index}>
-							<Button onClick={() => {
-								document
-									.getElementById("tooltip-" + index)
-									.parentNode
-									.removeChild(
+				{
+					this
+						.state
+						.itemArray
+						.map((item, index) => {
+							return (
+								<div style={item.style} id={"tooltip-" + index}>
+									<Button onClick={() => {
 										document
 											.getElementById("tooltip-" + index)
-									)
-							}}>X
+											.parentNode
+											.removeChild(
+												document
+													.getElementById("tooltip-" + index)
+											)
+									}}>X
 								</Button>
-							{item.value}
-						</div>
-					)
+									{item.value}
+								</div>
+							)
+						}
+						)
 				}
-				)
-		}
-=======
-				{this.state.itemArray.map((item, index) => {
-					return (
-						<div style={item.style} id={'tooltip-' + index}>
-							{item.value}{' '}
-							<Button
-								onClick={() => {
-									document
-										.getElementById('tooltip-' + index)
-										.parentNode.removeChild(
-											document.getElementById('tooltip-' + index)
-										);
-								}}
-							>
-								X
-							</Button>
-						</div>
-					);
-				})}
->>>>>>> master
 			</div >
 		);
 	}
