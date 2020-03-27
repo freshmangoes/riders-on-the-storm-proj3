@@ -179,13 +179,8 @@ class Mapv2 extends Component {
 
 				<ReactMapGL
 					ref={this.mapRef}
-<<<<<<< HEAD
-					width="99vw"
-					height="99vh"
-=======
 					width="78.5vw"
 					height="80vh"
->>>>>>> master
 					{...viewport}
 					onViewportChange={(viewport) => this.handleViewportChange(viewport)}
 					mapStyle="mapbox://styles/mapbox/streets-v11"
