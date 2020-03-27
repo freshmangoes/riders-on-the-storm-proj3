@@ -5,7 +5,7 @@ import ReactMapGL, {
 	FlyToInterpolator,
 	WebMercatorViewport
 } from 'react-map-gl';
-import { DeckGL,  GeoJsonLayer } from 'deck.gl';
+import { DeckGL, GeoJsonLayer } from 'deck.gl';
 import API from '../../utils/API';
 import { RouteContext } from '../../Context/RouteContext';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -125,6 +125,24 @@ class Mapv2 extends Component {
 			getLineWidth: 20,
 			getElevation: 30,
 			onClick: (info, event) => {
+<<<<<<< HEAD
+				// info houses the coordinates
+				// console.log('info', info);
+				// console.log('event', event);
+				this.showWeather({ lat: info.lngLat[1], lon: info.lngLat[0] }).then(data => {
+					const newArr = this.state.itemArray;
+					console.log(data, 'data')
+					newArr.push({ style: { left: info.x, top: info.y, display: "block", position: "absolute", background: "white", opacity: 0.9 }, value: <WeatherCard weatherObj={data.data} /> }
+
+
+					)
+					this.setState({
+						...this.state,
+						itemArray: newArr
+					})
+				});
+
+=======
 				this.showWeather({ lat: info.lngLat[1], lon: info.lngLat[0] }).then(
 					(data) => {
 						const newArr = this.state.itemArray;
@@ -145,6 +163,7 @@ class Mapv2 extends Component {
 						});
 					}
 				);
+>>>>>>> master
 			}
 		});
 
@@ -171,6 +190,31 @@ class Mapv2 extends Component {
 						trackUserLocation={true}
 					/>
 				</ReactMapGL>
+<<<<<<< HEAD
+		{
+			this
+				.state
+				.itemArray
+				.map((item, index) => {
+					return (
+						<div style={item.style} id={"tooltip-" + index}>
+							<Button onClick={() => {
+								document
+									.getElementById("tooltip-" + index)
+									.parentNode
+									.removeChild(
+										document
+											.getElementById("tooltip-" + index)
+									)
+							}}>X
+								</Button>
+							{item.value}
+						</div>
+					)
+				}
+				)
+		}
+=======
 				{this.state.itemArray.map((item, index) => {
 					return (
 						<div style={item.style} id={'tooltip-' + index}>
@@ -189,7 +233,8 @@ class Mapv2 extends Component {
 						</div>
 					);
 				})}
-			</div>
+>>>>>>> master
+			</div >
 		);
 	}
 }
