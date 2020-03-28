@@ -14,8 +14,8 @@ export const UserLogin = (props) => {
 		password: ''
 	});
 
-	const [swalState, setSwalState] = useState(false)
-	const [swalMessage, setSwalMessage] = useState('')
+	const [swalState, setSwalState] = useState(false);
+	const [swalMessage, setSwalMessage] = useState('');
 
 	const handleInputChange = (event) => {
 		const { name, value } = event.target;
@@ -65,7 +65,6 @@ export const UserLogin = (props) => {
 					setSwalMessage(data.data.message);
 					setSwalState(true);
 				}
-
 			})
 			.catch((err) => console.log(err));
 	};
