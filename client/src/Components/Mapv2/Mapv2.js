@@ -132,7 +132,7 @@ class Mapv2 extends Component {
 				this.showWeather({ lat: info.lngLat[1], lon: info.lngLat[0] }).then(data => {
 					const newArr = this.state.itemArray;
 					console.log(data, 'data')
-					newArr.push({ style: { left: info.x, top: info.y, display: "block", position: "absolute", background: "white", opacity: 0.9 }, value: <WeatherCard weatherObj={data.data} /> }
+					newArr.push({ style: { left: info.x, top: info.y, display: "block", position: "absolute" }, value: <WeatherCard weatherObj={data.data} /> }
 
 
 					)

@@ -49,7 +49,7 @@ const WeatherCard = (props) => {
     // This should show human readable data from the json above
     return (
         <div>
-            <Card>
+            <Card className="rounded">
             <CardBody className="bg-secondary">
             <CardHeader className="bg-dark text-warning">
                <h3 id="city">{weatherObj.name}</h3>
