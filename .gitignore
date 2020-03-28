@@ -1,6 +1,6 @@
 node_modules
 .env
-client/.env.*
+.env*
 client/node_modules
 .vscode
 client/.env.development
