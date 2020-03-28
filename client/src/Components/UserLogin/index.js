@@ -28,7 +28,7 @@ export const UserLogin = (props) => {
 
 	const handleFormSubmitLogin = (event) => {
 		event.preventDefault();
-		console.log(formData);
+		// console.log(formData);
 		API.userLogin(formData)
 			.then((data) => {
 				if (
@@ -50,7 +50,7 @@ export const UserLogin = (props) => {
 	};
 	const handleFormSubmitRegister = (event) => {
 		event.preventDefault();
-		console.log(formData);
+		// console.log(formData);
 		API.userRegister(formData)
 			.then((data) => {
 				if (data.data.message === 'New user has been registered!') {
