@@ -3,6 +3,7 @@ import API from '../../utils/API';
 import { Button, Form, Input } from 'reactstrap';
 import { CurrentUserIdContext } from '../../Context/CurrentUserIdContext';
 import { UserLoggedInContext } from '../../Context/UserLoggedInContext';
+import SweetAlert from 'sweetalert2-react';
 
 export const UserLogin = (props) => {
 	const { setCurrentUserId } = useContext(CurrentUserIdContext);
@@ -12,6 +13,9 @@ export const UserLogin = (props) => {
 		username: '',
 		password: ''
 	});
+
+	const [swalState, setSwalState] = useState(false)
+	const [swalMessage, setSwalMessage] = useState('')
 
 	const handleInputChange = (event) => {
 		const { name, value } = event.target;
@@ -24,19 +28,21 @@ export const UserLogin = (props) => {
 
 	const handleFormSubmitLogin = (event) => {
 		event.preventDefault();
-		console.log(formData);
+		// console.log(formData);
 		API.userLogin(formData)
 			.then((data) => {
 				if (
 					data.data.message ===
 					'The username and password combination is correct!'
 				) {
-					console.log(`You are logged in!`);
+					setSwalMessage(`You are logged in!`);
+					setSwalState(true);
 					setUserLoggedIn(true);
 					setCurrentUserId(data.data.id);
 					props.toggle();
 				} else {
-					alert(data.data.message);
+					setSwalMessage(data.data.message);
+					setSwalState(true);
 				}
 				console.log(data.data.message);
 			})
@@ -44,7 +50,7 @@ export const UserLogin = (props) => {
 	};
 	const handleFormSubmitRegister = (event) => {
 		event.preventDefault();
-		console.log(formData);
+		// console.log(formData);
 		API.userRegister(formData)
 			.then((data) => {
 				if (data.data.message === 'New user has been registered!') {
@@ -56,7 +62,8 @@ export const UserLogin = (props) => {
 				} else {
 					console.log(data.data.message);
 
-					alert(JSON.stringify(data.data.message));
+					setSwalMessage(data.data.message);
+					setSwalState(true);
 				}
 
 			})
@@ -104,6 +111,12 @@ export const UserLogin = (props) => {
 			>
 				Register
 			</Button>
+			<SweetAlert
+				show={swalState}
+				title="Message"
+				text={swalMessage}
+				onConfirm={() => setSwalState(false)}
+			/>
 		</div>
 	);
 };
