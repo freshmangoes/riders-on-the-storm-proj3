@@ -145,7 +145,7 @@ class Mapv2 extends Component {
 		});
 
 		return (
-			<div className="container-fluid p-0">
+			<div className="container-fluid p-10">
 				<ReactMapGL
 					ref={this.mapRef}
 					width="78.5vw"
@@ -182,7 +182,7 @@ class Mapv2 extends Component {
 												document
 													.getElementById("tooltip-" + index)
 											)
-									}}>X
+									}}>x
 								</Button>
 									{item.value}
 								</div>
