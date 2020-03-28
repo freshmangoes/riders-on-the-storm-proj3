@@ -2,7 +2,7 @@ import React from 'react';
 import './style.css';
 import { Card, CardTitle, CardBody, CardHeader } from 'reactstrap';
 
-function SideCard() {
+const SideCard = () => {
 	return (
 		<div>
 			<Card id="card">
