@@ -107,6 +107,15 @@ class Mapv2 extends Component {
 		});
 	};
 
+	renderTooltip = () => {
+		const { hoveredObject, pointerX, pointerY } = this.state || {};
+		return hoveredObject && (
+			<div style={{ position: 'absolute', zIndex: 1, pointerEvents: 'none', left: pointerX, top: pointerY }}>
+				<WeatherCard weatherObj={hoveredObject.data.data} />
+			</div>
+		);
+	}
+
 	render() {
 		const { viewport } = this.state;
 		const geoJsonData = this.state.route;
@@ -125,22 +134,37 @@ class Mapv2 extends Component {
 			getRadius: 100,
 			getLineWidth: 20,
 			getElevation: 30,
-			onClick: (info, event) => {
-				// info houses the coordinates
-				// console.log('info', info);
-				// console.log('event', event);
+			// onClick: (info, event) => {
+			// 	// info houses the coordinates
+			// 	// console.log('info', info);
+			// 	// console.log('event', event);
+			// 	this.showWeather({ lat: info.lngLat[1], lon: info.lngLat[0] }).then(data => {
+			// 		const newArr = this.state.itemArray;
+			// 		console.log(data, 'data')
+			// 		newArr.push({ style: { left: info.x, top: info.y, display: "block", position: "absolute" }, value: <WeatherCard weatherObj={data.data} /> }
+
+
+			// 		)
+			// 		this.setState({
+			// 			...this.state,
+			// 			itemArray: newArr
+			// 		})
+			// 	});
+			// }
+			onHover: (info, event) => {
+				// console.log('hover', info, event)
 				this.showWeather({ lat: info.lngLat[1], lon: info.lngLat[0] }).then(data => {
-					const newArr = this.state.itemArray;
-					console.log(data, 'data')
-					newArr.push({ style: { left: info.x, top: info.y, display: "block", position: "absolute" }, value: <WeatherCard weatherObj={data.data} /> }
-
-
+					console.log(data)
+					this.setState(
+						{
+							...this.state,
+							hoveredObject: { data },
+							pointerX: info.x,
+							pointerY: info.y
+						}
 					)
-					this.setState({
-						...this.state,
-						itemArray: newArr
-					})
-				});
+				})
+
 			}
 		});
 
@@ -169,26 +193,7 @@ class Mapv2 extends Component {
 				</ReactMapGL>
 				{
 					this
-						.state
-						.itemArray
-						.map((item, index) => {
-							return (
-								<div style={item.style} id={"tooltip-" + index}>
-									<Button onClick={() => {
-										document
-											.getElementById("tooltip-" + index)
-											.parentNode
-											.removeChild(
-												document
-													.getElementById("tooltip-" + index)
-											)
-									}}>x
-								</Button>
-									{item.value}
-								</div>
-							)
-						}
-						)
+						.renderTooltip()
 				}
 			</div >
 		);
