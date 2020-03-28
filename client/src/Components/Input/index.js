@@ -45,11 +45,11 @@ const Input = (props) => {
 			API.userInput(apiInputData)
 				.then((data) => {
 					if (data.data.message === 'Success') {
-						alert(`Added to search history`);
+						console.log(`Added to search history`);
 					} else if (data.data.message === 'Search exists!') {
 						console.log(data.data.message);
 					} else {
-						alert(data.data.message);
+						console.log(data.data.message);
 						console.log(data.data.message);
 					}
 				})

@@ -15,7 +15,7 @@ function Nav() {
 		event.preventDefault();
 		setUserLoggedIn(false);
 		setCurrentUserId('');
-		alert('You are now logged out');
+		// alert('You are now logged out');
 	};
 
 	return (
@@ -35,8 +35,8 @@ function Nav() {
 					/>
 				</div>
 			) : (
-				<UserLoginModal buttonLabel="Sign In / Register" />
-			)}
+					<UserLoginModal buttonLabel="Sign In / Register" />
+				)}
 		</nav>
 	);
 }

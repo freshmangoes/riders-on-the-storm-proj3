@@ -31,13 +31,12 @@ export const UserLogin = (props) => {
 					data.data.message ===
 					'The username and password combination is correct!'
 				) {
-					alert(`You are logged in!`);
+					console.log(`You are logged in!`);
 					setUserLoggedIn(true);
 					setCurrentUserId(data.data.id);
 					props.toggle();
 				} else {
 					alert(data.data.message);
-					props.toggle();
 				}
 				console.log(data.data.message);
 			})
@@ -48,10 +47,18 @@ export const UserLogin = (props) => {
 		console.log(formData);
 		API.userRegister(formData)
 			.then((data) => {
-				console.log(data.data.message);
+				if (data.data.message === 'New user has been registered!') {
+					console.log(data.data.message);
+					console.log(`You are logged in!`);
+					setUserLoggedIn(true);
+					setCurrentUserId(data.data.id);
+					props.toggle();
+				} else {
+					console.log(data.data.message);
 
-				alert(JSON.stringify(data.data.message));
-				props.toggle();
+					alert(JSON.stringify(data.data.message));
+				}
+
 			})
 			.catch((err) => console.log(err));
 	};
