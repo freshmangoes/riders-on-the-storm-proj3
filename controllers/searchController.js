@@ -9,9 +9,10 @@ module.exports = {
   },
   search: async (req, res) => {
     try {
-      const search = await db.Search.findOne({ start: req.body.start })
+      const search = await db.Search.findOne({ start: req.body.start, end: req.body.end })
 
       if (!search) {
+        console.log('adding new search', req.body)
         db.Search.create(req.body)
           .then(dbModel => res.json({ message: 'New search added!' }))
           .catch(error => res.status(200).json({ message: error }));
