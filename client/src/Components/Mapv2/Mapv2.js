@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'reactstrap';
+// import { Button } from 'reactstrap';
 import ReactMapGL, {
 	GeolocateControl,
 	FlyToInterpolator,
@@ -30,7 +30,7 @@ class Mapv2 extends Component {
 			zoom: 12
 		},
 		route: this.context.route,
-		itemArray: []
+		// itemArray: []
 	};
 
 	componentDidMount() {
