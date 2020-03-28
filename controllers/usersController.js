@@ -10,7 +10,7 @@ module.exports = {
         const user = await db.User.findOne({ username: req.body.username })
         if (!user) {
           db.User.create(req.body)
-            .then(dbModel => res.json({ message: 'New user has been registered!' }))
+            .then(dbModel => res.json({ message: 'New user has been registered!', id: dbModel._id }))
             .catch(error => res.status(200).json({ message: error }));
         } else {
           res.status(200).json({ message: 'User already exists, please register with a different username.' })
