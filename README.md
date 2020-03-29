@@ -5,6 +5,8 @@ Overview: MotoWeather allow users to input start and end locations of a route an
 ## Technologies Used
 React
 React Hooks
+React-Map-GL
+Deck.GL
 Axios
 Express 
 HTML
@@ -18,11 +20,13 @@ Mapbox
 
 ## Instructions
 
+* Clone the repo
+
+* Run `npm i` in the root directory of the app to install dependencies
+
 * Start the app by running `npm start` from the project root.
 
 * Once the app starts open your browser to [localhost:3000](http://localhost:3000).
-
-
 
 
 
@@ -36,4 +40,6 @@ Mapbox
 * Click On The Highlighted Route To Show Weather Data On Route
 
 * Once You're Logged In, Click On "Search History" For Old Routes
+
+![Example Gif](./moto-weather-gif.gif)
 
